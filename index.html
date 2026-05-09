@@ -3,376 +3,2152 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <title>GLD Security Service | Luxembourg</title>
-
+    <title>GLD Security Luxembourg – Your Safety, Our Responsibility</title>
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
-
     <style>
-      * {
+      *,
+      *::before,
+      *::after {
         box-sizing: border-box;
-      }
-
-      body {
         margin: 0;
+        padding: 0;
+      }
+      :root {
+        --navy: #0d1b2a;
+        --navy-mid: #162336;
+        --navy-light: #1e3050;
+        --gold: #e8a020;
+        --gold-light: #f5c060;
+        --gold-pale: #fdf4e0;
+        --slate: #4a5568;
+        --slate-light: #718096;
+        --off-white: #f4f6f9;
+        --white: #ffffff;
+        --red: #c0392b;
+        --radius: 8px;
+        --radius-lg: 14px;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
         font-family: "Inter", sans-serif;
-        background: #0a0f1c;
-        color: #e5e7eb;
+        color: var(--navy);
+        background: var(--white);
+        overflow-x: hidden;
       }
 
-      /* HEADER */
-      header {
+      /* ─── TOPBAR ─── */
+      .topbar {
+        background: var(--navy-mid);
+        padding: 9px 0;
+        font-size: 13px;
+        color: rgba(255, 255, 255, 0.65);
+      }
+      .topbar .tw {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 16px 40px;
-        position: fixed;
-        width: 100%;
-        background: rgba(10, 15, 28, 0.85);
-        backdrop-filter: blur(10px);
-        z-index: 1000;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+      .topbar a {
+        color: var(--gold-light);
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+      .topbar a:hover {
+        color: #fff;
+      }
+      .tb-left {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        flex-wrap: wrap;
+      }
+      .si {
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.08);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.2s;
+      }
+      .si:hover {
+        background: var(--gold);
+      }
+      .si svg {
+        width: 13px;
+        height: 13px;
+        fill: white;
       }
 
+      /* ─── NAV ─── */
+      nav {
+        background: var(--navy);
+        position: sticky;
+        top: 0;
+        z-index: 200;
+        box-shadow: 0 2px 24px rgba(0, 0, 0, 0.45);
+      }
+      .nav-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 68px;
+      }
       .logo {
         display: flex;
         align-items: center;
         gap: 10px;
-        font-weight: 700;
-        letter-spacing: 2px;
-      }
-
-      .logo span {
-        font-size: 14px;
-      }
-
-      nav a {
-        color: #9ca3af;
-        margin-left: 18px;
         text-decoration: none;
-        font-size: 13px;
+      }
+      .logo-mark {
+        width: 40px;
+        height: 40px;
+        flex-shrink: 0;
+      }
+      .logo-text {
+        font-size: 19px;
+        font-weight: 800;
+        color: white;
+        letter-spacing: 0.3px;
+        line-height: 1.1;
+      }
+      .logo-text span {
+        display: block;
+        font-size: 10px;
+        font-weight: 400;
+        color: var(--gold-light);
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+        margin-top: 1px;
+      }
+      .nav-links {
+        display: flex;
+        gap: 2px;
+        align-items: center;
+      }
+      .nav-links a {
+        color: rgba(255, 255, 255, 0.75);
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 500;
+        padding: 7px 13px;
+        border-radius: var(--radius);
+        transition: all 0.2s;
+      }
+      .nav-links a:hover {
+        color: white;
+        background: rgba(255, 255, 255, 0.08);
+      }
+      .nav-links .btn-cta {
+        background: var(--gold);
+        color: var(--navy);
+        font-weight: 700;
+        padding: 8px 20px;
+        border-radius: var(--radius);
+        margin-left: 6px;
+      }
+      .nav-links .btn-cta:hover {
+        background: var(--gold-light);
+        color: var(--navy);
       }
 
-      nav a:hover {
-        color: #fff;
+      /* Hamburger */
+      .ham {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+        padding: 8px;
+        border: none;
+        background: transparent;
+      }
+      .ham span {
+        display: block;
+        width: 22px;
+        height: 2px;
+        background: white;
+        border-radius: 2px;
+        transition: 0.3s;
+      }
+      .ham.open span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+      .ham.open span:nth-child(2) {
+        opacity: 0;
+        transform: scaleX(0);
+      }
+      .ham.open span:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px);
       }
 
-      /* HERO */
+      /* Mobile menu */
+      .mobile-menu {
+        display: none;
+        flex-direction: column;
+        background: var(--navy-mid);
+        padding: 12px 20px 20px;
+        border-top: 1px solid rgba(255, 255, 255, 0.07);
+      }
+      .mobile-menu.active {
+        display: flex;
+      }
+      .mobile-menu a {
+        color: rgba(255, 255, 255, 0.8);
+        text-decoration: none;
+        font-size: 15px;
+        font-weight: 500;
+        padding: 12px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        transition: color 0.2s;
+      }
+      .mobile-menu a:last-child {
+        border-bottom: none;
+        margin-top: 8px;
+        background: var(--gold);
+        color: var(--navy);
+        font-weight: 700;
+        text-align: center;
+        padding: 12px;
+        border-radius: var(--radius);
+      }
+      .mobile-menu a:hover {
+        color: var(--gold-light);
+      }
+      .mobile-menu a:last-child:hover {
+        background: var(--gold-light);
+      }
+
+      /* ─── HERO ─── */
       .hero {
-        height: 92vh;
-        position: relative;
+        background: var(--navy);
+        min-height: 88vh;
         display: flex;
         align-items: center;
-        padding: 0 60px;
+        position: relative;
         overflow: hidden;
+        padding: 70px 0 60px;
       }
-
       .hero-bg {
         position: absolute;
         inset: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        z-index: 0;
+        overflow: hidden;
+        pointer-events: none;
       }
-
-      .hero-overlay {
+      /* Animated particles */
+      .particle {
+        position: absolute;
+        border-radius: 50%;
+        background: var(--gold);
+        opacity: 0;
+        animation: float-particle linear infinite;
+      }
+      @keyframes float-particle {
+        0% {
+          transform: translateY(100vh) scale(0);
+          opacity: 0;
+        }
+        10% {
+          opacity: 0.15;
+        }
+        90% {
+          opacity: 0.08;
+        }
+        100% {
+          transform: translateY(-20vh) scale(1);
+          opacity: 0;
+        }
+      }
+      /* Animated grid lines */
+      .hero-grid {
         position: absolute;
         inset: 0;
-        background: rgba(10, 15, 28, 0.7);
-        z-index: 1;
+        background-image: linear-gradient(
+            rgba(232, 160, 32, 0.04) 1px,
+            transparent 1px
+          ),
+          linear-gradient(90deg, rgba(232, 160, 32, 0.04) 1px, transparent 1px);
+        background-size: 60px 60px;
+        animation: grid-drift 20s linear infinite;
+      }
+      @keyframes grid-drift {
+        0% {
+          background-position: 0 0;
+        }
+        100% {
+          background-position: 60px 60px;
+        }
+      }
+      .hero-glow {
+        position: absolute;
+        right: -100px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 600px;
+        height: 600px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(232, 160, 32, 0.06) 0%,
+          transparent 70%
+        );
+        animation: pulse-glow 4s ease-in-out infinite;
+      }
+      @keyframes pulse-glow {
+        0%,
+        100% {
+          transform: translateY(-50%) scale(1);
+          opacity: 0.5;
+        }
+        50% {
+          transform: translateY(-50%) scale(1.1);
+          opacity: 1;
+        }
       }
 
-      .hero-content {
+      .hero-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        align-items: center;
         position: relative;
         z-index: 2;
-        max-width: 650px;
       }
-
-      .hero h2 {
-        font-size: 48px;
-        font-weight: 700;
-        line-height: 1.1;
+      .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(232, 160, 32, 0.12);
+        border: 1px solid rgba(232, 160, 32, 0.3);
+        border-radius: 40px;
+        padding: 6px 16px;
+        font-size: 11px;
+        color: var(--gold-light);
+        font-weight: 600;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        margin-bottom: 22px;
+        animation: badge-in 0.6s ease both;
       }
-
+      @keyframes badge-in {
+        from {
+          opacity: 0;
+          transform: translateX(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+      .hero-badge-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--gold);
+        animation: blink 2s ease-in-out infinite;
+      }
+      @keyframes blink {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.3;
+        }
+      }
+      .hero h1 {
+        font-size: clamp(34px, 4.5vw, 60px);
+        font-weight: 800;
+        color: white;
+        line-height: 1.07;
+        margin-bottom: 22px;
+        letter-spacing: -0.5px;
+        animation: hero-text 0.7s ease 0.1s both;
+      }
+      .hero h1 em {
+        font-style: normal;
+        color: var(--gold);
+      }
+      @keyframes hero-text {
+        from {
+          opacity: 0;
+          transform: translateY(24px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
       .hero p {
-        margin-top: 12px;
-        color: #b0b7c3;
+        font-size: 16px;
+        color: rgba(255, 255, 255, 0.6);
+        line-height: 1.8;
+        max-width: 460px;
+        margin-bottom: 34px;
+        font-weight: 300;
+        animation: hero-text 0.7s ease 0.2s both;
       }
-
-      .cta-btn {
-        display: inline-block;
-        margin-top: 22px;
-        padding: 13px 28px;
-        background: linear-gradient(135deg, #d4af37, #f5d76e);
-        color: #111;
+      .hero-actions {
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+        animation: hero-text 0.7s ease 0.3s both;
+      }
+      .btn-primary {
+        background: var(--gold);
+        color: var(--navy);
         font-weight: 700;
+        font-size: 14px;
+        padding: 13px 30px;
+        border-radius: var(--radius);
         text-decoration: none;
-        border-radius: 10px;
-        transition: 0.25s;
-        box-shadow: 0 10px 25px rgba(212, 175, 55, 0.18);
+        transition: all 0.25s;
+        display: inline-block;
+      }
+      .btn-primary:hover {
+        background: var(--gold-light);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(232, 160, 32, 0.35);
+      }
+      .btn-outline {
+        border: 1.5px solid rgba(255, 255, 255, 0.3);
+        color: white;
+        font-weight: 500;
+        font-size: 14px;
+        padding: 13px 30px;
+        border-radius: var(--radius);
+        text-decoration: none;
+        transition: all 0.25s;
+        display: inline-block;
+      }
+      .btn-outline:hover {
+        border-color: rgba(255, 255, 255, 0.7);
+        background: rgba(255, 255, 255, 0.05);
+      }
+      .hero-visual {
+        display: flex;
+        justify-content: center;
+        animation: hero-text 0.8s ease 0.35s both;
+      }
+      /* Shield rotation animation */
+      .shield-ring {
+        transform-origin: 230px 230px;
+        animation: spin-slow 18s linear infinite;
+      }
+      .shield-ring2 {
+        transform-origin: 230px 230px;
+        animation: spin-slow 12s linear infinite reverse;
+      }
+      @keyframes spin-slow {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      .shield-pulse {
+        transform-origin: 230px 230px;
+        animation: shield-beat 3s ease-in-out infinite;
+      }
+      @keyframes shield-beat {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.03);
+        }
       }
 
-      .cta-btn:hover {
+      /* ─── STATS BAR ─── */
+      .stats-bar {
+        background: var(--navy-mid);
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+      }
+      .stats-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 32px 20px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .stat-item {
+        text-align: center;
+        padding: 0 20px;
+        border-right: 1px solid rgba(255, 255, 255, 0.07);
+      }
+      .stat-item:last-child {
+        border-right: none;
+      }
+      .stat-num {
+        font-size: clamp(38px, 5vw, 52px);
+        font-weight: 800;
+        color: var(--gold);
+        line-height: 1;
+      }
+      .stat-num sup {
+        font-size: 0.5em;
+        vertical-align: super;
+      }
+      .stat-label {
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.45);
+        margin-top: 6px;
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+        font-weight: 500;
+      }
+
+      /* ─── SECTIONS ─── */
+      .section-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+      .section-label {
+        display: inline-block;
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--gold);
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        margin-bottom: 14px;
+      }
+      .section-title {
+        font-size: clamp(28px, 3.5vw, 42px);
+        font-weight: 800;
+        color: var(--navy);
+        line-height: 1.12;
+        margin-bottom: 16px;
+        letter-spacing: -0.3px;
+      }
+      .divider-bar {
+        width: 44px;
+        height: 3px;
+        background: var(--gold);
+        border-radius: 2px;
+        margin-bottom: 28px;
+      }
+
+      /* ─── ABOUT ─── */
+      .about {
+        padding: 90px 0;
+        background: var(--off-white);
+      }
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 70px;
+        align-items: start;
+      }
+      .about-text p {
+        font-size: 15px;
+        color: var(--slate);
+        line-height: 1.85;
+        margin-bottom: 14px;
+        font-weight: 400;
+      }
+      .values-title {
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--navy);
+        margin: 28px 0 18px;
+      }
+      .values-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+      .value-card {
+        background: white;
+        border-radius: var(--radius-lg);
+        padding: 22px 18px;
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        transition: all 0.3s;
+        position: relative;
+        overflow: hidden;
+      }
+      .value-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 3px;
+        height: 100%;
+        background: var(--gold);
+        transform: scaleY(0);
+        transform-origin: bottom;
+        transition: transform 0.3s;
+      }
+      .value-card:hover::before {
+        transform: scaleY(1);
+      }
+      .value-card:hover {
+        box-shadow: 0 8px 28px rgba(0, 0, 0, 0.09);
         transform: translateY(-3px);
       }
-
-      /* SECTIONS */
-      .section {
-        padding: 60px 40px;
-      }
-
-      h2 {
-        font-size: 28px;
-      }
-
-      /* GRID */
-      .grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 18px;
-        margin-top: 25px;
-      }
-
-      /* CARDS */
-      .card {
-        background: #111827;
-        padding: 22px;
-        border-radius: 12px;
-        border: 1px solid #1f2937;
-        transition: 0.25s;
-      }
-
-      .card:hover {
-        transform: translateY(-6px);
-        border-color: #d4af37;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
-      }
-
-      .icon {
-        font-size: 24px;
-        color: #d4af37;
-        margin-bottom: 8px;
-      }
-
-      .card p {
-        color: #9ca3af;
-        font-size: 13px;
-      }
-
-      /* TRUST */
-      .trust {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 15px;
-        margin-top: 25px;
-      }
-
-      /* CONTACT (GLOBAL FIXED) */
-      #contact {
+      .value-icon {
+        width: 38px;
+        height: 38px;
+        border-radius: 9px;
+        background: var(--gold-pale);
         display: flex;
-        flex-direction: column;
         align-items: center;
+        justify-content: center;
+        margin-bottom: 10px;
       }
-
-      /* FORM */
-      form {
-        width: 100%;
-        max-width: 650px;
-        background: #111827;
-        padding: 28px;
-        border-radius: 14px;
-        border: 1px solid #1f2937;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-        margin-top: 20px;
+      .value-icon svg {
+        width: 18px;
+        height: 18px;
       }
-
-      input,
-      textarea {
-        width: 100%;
-        padding: 14px;
-        margin-top: 12px;
-        background: #0f172a;
-        border: 1px solid #1f2937;
-        color: #fff;
-        border-radius: 8px;
+      .value-card h3 {
         font-size: 14px;
-      }
-
-      input:focus,
-      textarea:focus {
-        border-color: #d4af37;
-        outline: none;
-        box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15);
-      }
-
-      button {
-        margin-top: 16px;
-        padding: 14px;
-        background: linear-gradient(135deg, #d4af37, #f5d76e);
-        border: none;
         font-weight: 700;
-        width: 100%;
-        border-radius: 8px;
-        cursor: pointer;
-        transition: 0.25s;
+        color: var(--navy);
+        margin-bottom: 5px;
+      }
+      .value-card p {
+        font-size: 12.5px;
+        color: var(--slate-light);
+        line-height: 1.65;
       }
 
-      button:hover {
-        transform: translateY(-2px);
+      /* ─── SERVICES ─── */
+      .services {
+        padding: 90px 0;
+        background: var(--navy);
       }
-
-      /* FOOTER */
-      footer {
+      .services .section-title {
+        color: white;
+      }
+      .services .section-label {
+        color: var(--gold-light);
+      }
+      .services .divider-bar {
+        background: var(--gold);
+      }
+      .services-head {
         text-align: center;
-        padding: 25px;
-        color: #6b7280;
+        margin-bottom: 52px;
+      }
+      .services-head .divider-bar {
+        margin: 0 auto;
+      }
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+      }
+      .service-card {
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: var(--radius-lg);
+        padding: 32px 24px;
+        text-align: center;
+        transition: all 0.35s;
+        cursor: default;
+      }
+      .service-card:hover {
+        background: rgba(255, 255, 255, 0.07);
+        border-color: rgba(232, 160, 32, 0.5);
+        transform: translateY(-6px);
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
+      }
+      .svc-icon {
+        width: 68px;
+        height: 68px;
+        border-radius: 50%;
+        border: 1.5px solid rgba(192, 57, 43, 0.35);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 22px;
+        transition: all 0.35s;
+      }
+      .service-card:hover .svc-icon {
+        border-color: var(--gold);
+        background: rgba(232, 160, 32, 0.1);
+        transform: rotate(5deg) scale(1.05);
+      }
+      .svc-icon svg {
+        width: 30px;
+        height: 30px;
+        stroke: rgba(192, 57, 43, 0.65);
+        fill: none;
+        stroke-width: 1.6;
+        transition: stroke 0.35s;
+      }
+      .service-card:hover .svc-icon svg {
+        stroke: var(--gold);
+      }
+      .service-card h3 {
+        font-size: 16px;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 10px;
+        line-height: 1.3;
+      }
+      .service-card p {
+        font-size: 13px;
+        color: rgba(255, 255, 255, 0.48);
+        line-height: 1.75;
+      }
+      .services-cta {
+        text-align: center;
+        margin-top: 48px;
       }
 
-      /* TABLET */
-      @media (max-width: 992px) {
-        .grid {
-          grid-template-columns: repeat(2, 1fr);
-        }
-
-        .trust {
-          grid-template-columns: repeat(2, 1fr);
-        }
-
-        .hero h2 {
-          font-size: 38px;
-        }
+      /* ─── CTA BAND ─── */
+      .cta-band {
+        background: var(--gold);
+        padding: 56px 0;
+        position: relative;
+        overflow: hidden;
+      }
+      .cta-band::before {
+        content: "";
+        position: absolute;
+        right: -60px;
+        top: -60px;
+        width: 260px;
+        height: 260px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.08);
+      }
+      .cta-band::after {
+        content: "";
+        position: absolute;
+        left: 10%;
+        bottom: -80px;
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        background: rgba(0, 0, 0, 0.06);
+      }
+      .cta-band-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 36px;
+        position: relative;
+        z-index: 2;
+      }
+      .cta-band h2 {
+        font-size: clamp(22px, 3vw, 34px);
+        font-weight: 800;
+        color: var(--navy);
+        line-height: 1.2;
+      }
+      .cta-band p {
+        font-size: 14px;
+        color: rgba(13, 27, 42, 0.65);
+        margin-top: 6px;
+      }
+      .btn-dark {
+        background: var(--navy);
+        color: white;
+        font-weight: 700;
+        font-size: 14px;
+        padding: 14px 32px;
+        border-radius: var(--radius);
+        text-decoration: none;
+        transition: all 0.25s;
+        white-space: nowrap;
+      }
+      .btn-dark:hover {
+        background: var(--navy-light);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
       }
 
-      /* MOBILE */
-      @media (max-width: 600px) {
-        header {
-          padding: 14px 18px;
-        }
+      /* ─── NEWS ─── */
+      .news {
+        padding: 90px 0;
+        background: var(--off-white);
+      }
+      .news-head {
+        text-align: center;
+        margin-bottom: 52px;
+      }
+      .news-head .divider-bar {
+        margin: 0 auto;
+      }
+      .news-head .section-title {
+        color: var(--navy);
+      }
+      .news-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+      }
+      .news-card {
+        background: white;
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        transition: all 0.35s;
+      }
+      .news-card:hover {
+        box-shadow: 0 14px 40px rgba(0, 0, 0, 0.1);
+        transform: translateY(-5px);
+      }
+      .news-img {
+        height: 190px;
+        overflow: hidden;
+        position: relative;
+        background: var(--navy-mid);
+      }
+      .news-img svg {
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+      .news-tag {
+        position: absolute;
+        top: 14px;
+        left: 14px;
+        background: var(--gold);
+        color: var(--navy);
+        font-size: 10px;
+        font-weight: 700;
+        padding: 4px 11px;
+        border-radius: 40px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+      .news-body {
+        padding: 24px 22px 28px;
+      }
+      .news-date {
+        font-size: 11px;
+        color: var(--slate-light);
+        margin-bottom: 8px;
+        letter-spacing: 0.5px;
+      }
+      .news-card h3 {
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--navy);
+        margin-bottom: 8px;
+        line-height: 1.35;
+      }
+      .news-card p {
+        font-size: 13px;
+        color: var(--slate);
+        line-height: 1.72;
+      }
 
-        nav {
+      /* ─── FOOTER ─── */
+      footer {
+        background: var(--navy);
+        padding: 64px 0 0;
+      }
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 1.4fr 1fr 1fr;
+        gap: 52px;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px 56px;
+      }
+      .footer-brand p {
+        font-size: 13.5px;
+        color: rgba(255, 255, 255, 0.4);
+        line-height: 1.75;
+        max-width: 270px;
+        margin-top: 16px;
+      }
+      .f-contact {
+        margin-top: 18px;
+      }
+      .f-contact p {
+        font-size: 13px;
+        color: rgba(255, 255, 255, 0.5);
+        margin-bottom: 5px;
+        line-height: 1.6;
+      }
+      .f-contact a {
+        color: var(--gold-light);
+        text-decoration: none;
+      }
+      .f-contact a:hover {
+        color: white;
+      }
+      .footer-col h4 {
+        font-size: 11px;
+        font-weight: 700;
+        color: white;
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+        margin-bottom: 18px;
+      }
+      .footer-col a {
+        display: block;
+        font-size: 13.5px;
+        color: rgba(255, 255, 255, 0.42);
+        text-decoration: none;
+        margin-bottom: 9px;
+        transition: color 0.2s;
+      }
+      .footer-col a:hover {
+        color: var(--gold-light);
+      }
+      .footer-map {
+        border-radius: var(--radius);
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        margin-top: 4px;
+      }
+      .footer-map iframe {
+        display: block;
+        width: 100%;
+        height: 195px;
+        border: none;
+        filter: grayscale(55%) contrast(1.1);
+      }
+      .footer-bottom {
+        border-top: 1px solid rgba(255, 255, 255, 0.07);
+        padding: 22px 20px;
+        text-align: center;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      .footer-bottom p {
+        font-size: 12.5px;
+        color: rgba(255, 255, 255, 0.28);
+      }
+      .footer-legal {
+        font-size: 11.5px;
+        color: rgba(255, 255, 255, 0.18);
+        margin-top: 4px;
+      }
+
+      /* ─── SCROLL TO TOP ─── */
+      #scrollTop {
+        position: fixed;
+        bottom: 28px;
+        right: 24px;
+        z-index: 999;
+        width: 46px;
+        height: 46px;
+        border-radius: 50%;
+        background: var(--gold);
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 18px rgba(232, 160, 32, 0.4);
+        opacity: 0;
+        transform: translateY(20px) scale(0.85);
+        transition: all 0.35s;
+        pointer-events: none;
+      }
+      #scrollTop.visible {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        pointer-events: auto;
+      }
+      #scrollTop:hover {
+        background: var(--gold-light);
+        transform: translateY(-3px) scale(1.05);
+      }
+      #scrollTop svg {
+        width: 18px;
+        height: 18px;
+        stroke: var(--navy);
+        fill: none;
+        stroke-width: 2.5;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      /* ─── MOBILE ─── */
+      @media (max-width: 960px) {
+        .hero-inner {
+          grid-template-columns: 1fr;
+          gap: 0;
+        }
+        .hero-visual {
           display: none;
         }
-
         .hero {
-          padding: 0 20px;
+          min-height: auto;
+          padding: 60px 0 52px;
         }
-
-        .hero h2 {
-          font-size: 30px;
+        .about-grid {
+          grid-template-columns: 1fr;
+          gap: 40px;
         }
-
-        .section {
-          padding: 45px 18px;
+        .services-grid {
+          grid-template-columns: repeat(2, 1fr);
         }
-
-        .grid {
+        .news-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .footer-grid {
+          grid-template-columns: 1fr;
+          gap: 36px;
+        }
+        .stats-inner {
+          grid-template-columns: repeat(3, 1fr);
+        }
+        .cta-band-inner {
+          flex-direction: column;
+          text-align: center;
+        }
+        .nav-links {
+          display: none;
+        }
+        .ham {
+          display: flex;
+        }
+        .topbar .tw {
+          justify-content: center;
+        }
+      }
+      @media (max-width: 600px) {
+        .services-grid {
           grid-template-columns: 1fr;
         }
-
-        .trust {
+        .news-grid {
           grid-template-columns: 1fr;
         }
+        .values-grid {
+          grid-template-columns: 1fr;
+        }
+        .stats-inner {
+          grid-template-columns: 1fr;
+        }
+        .stat-item {
+          border-right: none;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+          padding: 0 20px 20px;
+          margin-bottom: 16px;
+        }
+        .stat-item:last-child {
+          border-bottom: none;
+          margin-bottom: 0;
+          padding-bottom: 0;
+        }
+        .hero h1 {
+          font-size: 32px;
+        }
+        .hero-actions {
+          gap: 10px;
+        }
+        .btn-primary,
+        .btn-outline {
+          padding: 12px 22px;
+          font-size: 14px;
+        }
+        #scrollTop {
+          bottom: 20px;
+          right: 16px;
+          width: 42px;
+          height: 42px;
+        }
+      }
+
+      /* ─── REVEAL ANIMATIONS ─── */
+      .reveal {
+        opacity: 0;
+        transform: translateY(32px);
+        transition: opacity 0.65s ease, transform 0.65s ease;
+      }
+      .reveal.in {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .reveal-left {
+        opacity: 0;
+        transform: translateX(-32px);
+        transition: opacity 0.65s ease, transform 0.65s ease;
+      }
+      .reveal-left.in {
+        opacity: 1;
+        transform: translateX(0);
+      }
+      .reveal-right {
+        opacity: 0;
+        transform: translateX(32px);
+        transition: opacity 0.65s ease, transform 0.65s ease;
+      }
+      .reveal-right.in {
+        opacity: 1;
+        transform: translateX(0);
+      }
+      .delay-1 {
+        transition-delay: 0.1s;
+      }
+      .delay-2 {
+        transition-delay: 0.2s;
+      }
+      .delay-3 {
+        transition-delay: 0.3s;
+      }
+      .delay-4 {
+        transition-delay: 0.4s;
+      }
+      .delay-5 {
+        transition-delay: 0.5s;
       }
     </style>
   </head>
-
   <body>
-    <header>
-      <div class="logo">
-        <svg width="38" height="38" viewBox="0 0 64 64" fill="none">
-          <path
-            d="M32 4L54 12V28C54 44 44 56 32 60C20 56 10 44 10 28V12L32 4Z"
-            stroke="#D4AF37"
-            stroke-width="3"
-          />
-          <circle cx="32" cy="30" r="6" stroke="#D4AF37" stroke-width="3" />
-        </svg>
-        <span>GLD SECURITY</span>
+    <!-- TOP BAR -->
+    <div class="topbar">
+      <div class="tw">
+        <a href="mailto:info@gldsecurity.lu">info@gldsecurity.lu</a>
       </div>
+    </div>
 
-      <nav>
-        <a href="#">Home</a>
-        <a href="#services">Services</a>
-        <a href="#contact">Contact</a>
-      </nav>
-    </header>
+    <!-- NAV -->
+    <nav>
+      <div class="nav-inner">
+        <a href="#" class="logo">
+          <svg class="logo-mark" viewBox="0 0 40 40" fill="none">
+            <path
+              d="M20 3L3 10v10c0 10 7 18 17 20 10-2 17-10 17-20V10L20 3z"
+              fill="rgba(232,160,32,.15)"
+              stroke="#e8a020"
+              stroke-width="1.6"
+            />
+            <path
+              d="M14 20l4 4 8-8"
+              stroke="#e8a020"
+              stroke-width="2.4"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+          <div class="logo-text">GLD Security<span>Luxembourg</span></div>
+        </a>
+        <div class="nav-links">
+          <a href="#home">Home</a>
+          <a href="#services">Services</a>
+          <a href="#about">About</a>
+          <a href="#news">News</a>
+          <a href="#">Jobs</a>
+          <a href="#contact" class="btn-cta">Contact</a>
+        </div>
+        <button class="ham" aria-label="Toggle menu" onclick="toggleMenu()">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+      <div class="mobile-menu" id="mobileMenu">
+        <a href="#home" onclick="closeMenu()">Home</a>
+        <a href="#services" onclick="closeMenu()">Services</a>
+        <a href="#about" onclick="closeMenu()">About</a>
+        <a href="#news" onclick="closeMenu()">News</a>
+        <a href="#" onclick="closeMenu()">Jobs</a>
+        <a href="#contact" onclick="closeMenu()">Contact Us</a>
+      </div>
+    </nav>
 
     <!-- HERO -->
-    <section class="hero">
-      <img
-        class="hero-bg"
-        src="https://images.pexels.com/photos/2386144/pexels-photo-2386144.jpeg?auto=compress&cs=tinysrgb&w=2000"
-        alt="Security Background"
-      />
+    <section class="hero" id="home">
+      <div class="hero-bg">
+        <div class="hero-grid"></div>
+        <div class="hero-glow"></div>
+        <!-- Floating particles -->
+        <div
+          class="particle"
+          style="
+            width: 4px;
+            height: 4px;
+            left: 15%;
+            animation-duration: 12s;
+            animation-delay: 0s;
+          "
+        ></div>
+        <div
+          class="particle"
+          style="
+            width: 3px;
+            height: 3px;
+            left: 35%;
+            animation-duration: 15s;
+            animation-delay: 2s;
+          "
+        ></div>
+        <div
+          class="particle"
+          style="
+            width: 5px;
+            height: 5px;
+            left: 55%;
+            animation-duration: 10s;
+            animation-delay: 4s;
+          "
+        ></div>
+        <div
+          class="particle"
+          style="
+            width: 3px;
+            height: 3px;
+            left: 75%;
+            animation-duration: 13s;
+            animation-delay: 1s;
+          "
+        ></div>
+        <div
+          class="particle"
+          style="
+            width: 4px;
+            height: 4px;
+            left: 88%;
+            animation-duration: 11s;
+            animation-delay: 3s;
+          "
+        ></div>
+        <div
+          class="particle"
+          style="
+            width: 2px;
+            height: 2px;
+            left: 25%;
+            animation-duration: 16s;
+            animation-delay: 5s;
+          "
+        ></div>
+        <div
+          class="particle"
+          style="
+            width: 3px;
+            height: 3px;
+            left: 65%;
+            animation-duration: 14s;
+            animation-delay: 2.5s;
+          "
+        ></div>
+      </div>
+      <div class="hero-inner">
+        <div>
+          <div class="hero-badge">
+            <span class="hero-badge-dot"></span>Trusted Since 2011
+          </div>
+          <h1>Your Safety Is<br /><em>Our</em> Responsibility</h1>
+          <p>
+            Professional security services tailored for individuals and
+            businesses across Luxembourg. Competent, discreet, and always
+            present when you need us most.
+          </p>
+          <div class="hero-actions">
+            <a href="#contact" class="btn-primary">Get in Touch</a>
+            <a href="#services" class="btn-outline">Our Services</a>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <svg
+            width="440"
+            height="440"
+            viewBox="0 0 460 460"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <!-- Outer decorative ring -->
+            <circle
+              cx="230"
+              cy="230"
+              r="195"
+              stroke="rgba(232,160,32,.06)"
+              stroke-width="1"
+              class="shield-ring"
+              stroke-dasharray="12 8"
+            />
+            <circle
+              cx="230"
+              cy="230"
+              r="165"
+              stroke="rgba(232,160,32,.05)"
+              stroke-width="1"
+              class="shield-ring2"
+              stroke-dasharray="6 10"
+            />
+            <!-- Outer corner marks on ring -->
+            <circle cx="230" cy="35" r="4" fill="rgba(232,160,32,.4)" />
+            <circle cx="425" cy="230" r="4" fill="rgba(232,160,32,.3)" />
+            <circle cx="230" cy="425" r="4" fill="rgba(232,160,32,.4)" />
+            <circle cx="35" cy="230" r="4" fill="rgba(232,160,32,.3)" />
+            <!-- Shield body -->
+            <g class="shield-pulse">
+              <path
+                d="M230 62L80 125V220C80 318 148 396 230 418C312 396 380 318 380 220V125L230 62Z"
+                fill="rgba(232,160,32,.05)"
+                stroke="rgba(232,160,32,.22)"
+                stroke-width="1.5"
+              />
+              <path
+                d="M230 90L108 145V220C108 304 166 372 230 392C294 372 352 304 352 220V145L230 90Z"
+                fill="rgba(232,160,32,.06)"
+                stroke="rgba(232,160,32,.12)"
+                stroke-width="1"
+              />
+              <!-- GLD initials inside shield -->
+              <text
+                x="230"
+                y="215"
+                text-anchor="middle"
+                fill="rgba(232,160,32,.2)"
+                font-family="Inter,sans-serif"
+                font-weight="800"
+                font-size="52"
+              >
+                GLD
+              </text>
+              <!-- Checkmark -->
+              <path
+                d="M175 232l38 38 72-72"
+                stroke="#e8a020"
+                stroke-width="12"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </g>
+            <!-- Agent dots -->
+            <circle
+              cx="120"
+              cy="155"
+              r="16"
+              fill="rgba(255,255,255,.05)"
+              stroke="rgba(255,255,255,.14)"
+              stroke-width="1"
+            />
+            <circle
+              cx="120"
+              cy="150"
+              r="5"
+              fill="rgba(255,255,255,.15)"
+              stroke="rgba(255,255,255,.2)"
+              stroke-width="1"
+            />
+            <path
+              d="M109 169c0-6 5-11 11-11s11 5 11 11"
+              stroke="rgba(255,255,255,.15)"
+              stroke-width="1"
+              fill="none"
+              stroke-linecap="round"
+            />
+            <circle
+              cx="340"
+              cy="158"
+              r="16"
+              fill="rgba(255,255,255,.05)"
+              stroke="rgba(255,255,255,.14)"
+              stroke-width="1"
+            />
+            <circle
+              cx="340"
+              cy="153"
+              r="5"
+              fill="rgba(255,255,255,.15)"
+              stroke="rgba(255,255,255,.2)"
+              stroke-width="1"
+            />
+            <path
+              d="M329 172c0-6 5-11 11-11s11 5 11 11"
+              stroke="rgba(255,255,255,.15)"
+              stroke-width="1"
+              fill="none"
+              stroke-linecap="round"
+            />
+          </svg>
+        </div>
+      </div>
+    </section>
 
-      <div class="hero-overlay"></div>
+    <!-- STATS BAR -->
+    <div class="stats-bar">
+      <div class="stats-inner">
+        <div class="stat-item reveal delay-1">
+          <div class="stat-num" data-target="13">0</div>
+          <div class="stat-label">Years of Experience</div>
+        </div>
+        <div class="stat-item reveal delay-2">
+          <div class="stat-num" data-target="300" data-suffix="+">0</div>
+          <div class="stat-label">Satisfied Clients</div>
+        </div>
+        <div class="stat-item reveal delay-3">
+          <div class="stat-num" data-target="150" data-suffix="+">0</div>
+          <div class="stat-label">Security Agents</div>
+        </div>
+      </div>
+    </div>
 
-      <div class="hero-content">
-        <h2>Trusted Security Services in Luxembourg</h2>
-        <p>
-          Professional protection for corporate, residential, and event security
-          with trained personnel.
-        </p>
-        <a href="#contact" class="cta-btn">Request Consultation</a>
+    <!-- ABOUT -->
+    <section class="about" id="about">
+      <div class="section-inner">
+        <div class="about-grid">
+          <div class="reveal-left">
+            <span class="section-label">About Us</span>
+            <h2 class="section-title">Who We Are</h2>
+            <div class="divider-bar"></div>
+            <div class="about-text">
+              <p>
+                GLD Security S.à.r.l. is a licensed security company founded in
+                December 2011 in Luxembourg. Over the years, we have grown into
+                one of the most trusted names in professional security services
+                across the Grand Duchy.
+              </p>
+              <p>
+                We adapt to every need and mission you entrust to us. Our
+                competent, professional, and friendly personnel ensures every
+                security assignment is handled with the highest level of
+                quality, flexibility, loyalty, and above all — discretion.
+              </p>
+              <p>
+                A well-organised relationship between GLD Security, our clients,
+                and our security agents is the foundation of our exceptional
+                service delivery.
+              </p>
+            </div>
+          </div>
+          <div class="reveal-right">
+            <p class="values-title">Our Core Values</p>
+            <div class="values-grid">
+              <div class="value-card reveal delay-1">
+                <div class="value-icon">
+                  <svg
+                    viewBox="0 0 18 18"
+                    fill="none"
+                    stroke="#e8a020"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M9 1l2.16 4.36 4.84.7-3.5 3.41.83 4.82L9 12.08l-4.33 2.27.83-4.82L2 6.06l4.84-.7L9 1z"
+                    />
+                  </svg>
+                </div>
+                <h3>Quality Guarantee</h3>
+                <p>
+                  Competent, professional personnel for every security service
+                  we provide.
+                </p>
+              </div>
+              <div class="value-card reveal delay-2">
+                <div class="value-icon">
+                  <svg
+                    viewBox="0 0 18 18"
+                    fill="none"
+                    stroke="#e8a020"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M2 9h14M9 2l3.5 7-3.5 7-3.5-7L9 2z" />
+                  </svg>
+                </div>
+                <h3>Flexibility</h3>
+                <p>
+                  Adapted to each client's specific needs and missions they
+                  entrust to us.
+                </p>
+              </div>
+              <div class="value-card reveal delay-3">
+                <div class="value-icon">
+                  <svg
+                    viewBox="0 0 18 18"
+                    fill="none"
+                    stroke="#e8a020"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <circle cx="9" cy="7" r="3" />
+                    <path d="M3 16v-1a6 6 0 0 1 12 0v1" />
+                    <path d="M1 11s1-2 4-2M17 11s-1-2-4-2" />
+                  </svg>
+                </div>
+                <h3>Discretion</h3>
+                <p>
+                  Operating quietly in the background, yet present whenever
+                  needed.
+                </p>
+              </div>
+              <div class="value-card reveal delay-4">
+                <div class="value-icon">
+                  <svg
+                    viewBox="0 0 18 18"
+                    fill="none"
+                    stroke="#e8a020"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M9 2a7 7 0 0 1 7 7c0 4.5-3.5 8-7 9C5.5 17 2 13.5 2 9a7 7 0 0 1 7-7z"
+                    />
+                    <path d="M6 9l2 2 4-4" />
+                  </svg>
+                </div>
+                <h3>Loyalty</h3>
+                <p>
+                  We make no compromises when it comes to our clients' safety.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- SERVICES -->
-    <section class="section" id="services">
-      <h2>Our Services</h2>
-
-      <div class="grid">
-        <div class="card">
-          <div class="icon">🛡️</div>
-          <h3>Corporate Security</h3>
-          <p>Protection for offices, assets, and staff.</p>
+    <section class="services" id="services">
+      <div class="section-inner">
+        <div class="services-head reveal">
+          <span class="section-label">What We Offer</span>
+          <h2 class="section-title">Our Services</h2>
+          <div
+            class="divider-bar"
+            style="
+              width: 44px;
+              height: 3px;
+              background: var(--gold);
+              border-radius: 2px;
+              margin: 14px auto 0;
+            "
+          ></div>
         </div>
-
-        <div class="card">
-          <div class="icon">🎯</div>
-          <h3>Event Security</h3>
-          <p>Complete crowd control and safety management.</p>
+        <div class="services-grid">
+          <div class="service-card reveal delay-1">
+            <div class="svc-icon">
+              <svg
+                viewBox="0 0 30 30"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect
+                  x="3"
+                  y="7"
+                  width="15"
+                  height="18"
+                  rx="2"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                />
+                <path
+                  d="M18 11h4a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-4"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                />
+                <circle
+                  cx="10.5"
+                  cy="16"
+                  r="2"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                />
+                <path
+                  d="M7.5 24v-1.5a3 3 0 0 1 6 0V24"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                />
+              </svg>
+            </div>
+            <h3>Reception &amp; Access Control</h3>
+            <p>
+              Professional front-desk and access management services for
+              offices, buildings, and complexes.
+            </p>
+          </div>
+          <div class="service-card reveal delay-2">
+            <div class="svc-icon">
+              <svg
+                viewBox="0 0 30 30"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M15 3L3 9v9c0 9 6 15 12 17 6-2 12-8 12-17V9L15 3z"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                />
+                <path
+                  d="M10 15l3.5 3.5 7-7"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                />
+              </svg>
+            </div>
+            <h3>Event &amp; Personal Security</h3>
+            <p>
+              Comprehensive security coverage for events of all sizes, from
+              private gatherings to large-scale public events.
+            </p>
+          </div>
+          <div class="service-card reveal delay-3">
+            <div class="svc-icon">
+              <svg
+                viewBox="0 0 30 30"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect
+                  x="3"
+                  y="7"
+                  width="24"
+                  height="16"
+                  rx="2"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                />
+                <circle
+                  cx="15"
+                  cy="15"
+                  r="4"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                />
+                <path
+                  d="M3 11h4M23 11h4M3 19h4M23 19h4"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                />
+              </svg>
+            </div>
+            <h3>General Surveillance</h3>
+            <p>
+              Round-the-clock monitoring and surveillance using trained agents
+              and modern technology.
+            </p>
+          </div>
+          <div class="service-card reveal delay-1">
+            <div class="svc-icon">
+              <svg
+                viewBox="0 0 30 30"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M4 17h22M6 9l-3 8 2 7h20l2-7-3-8H6z"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                />
+                <circle
+                  cx="9.5"
+                  cy="23"
+                  r="2.5"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                />
+                <circle
+                  cx="20.5"
+                  cy="23"
+                  r="2.5"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                />
+                <path
+                  d="M15 9V5M12 5h6"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                />
+              </svg>
+            </div>
+            <h3>Mobile Security</h3>
+            <p>
+              Rapid-response mobile patrol units covering multiple sites with
+              flexible security support.
+            </p>
+          </div>
+          <div class="service-card reveal delay-2">
+            <div class="svc-icon">
+              <svg
+                viewBox="0 0 30 30"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle
+                  cx="15"
+                  cy="10"
+                  r="5"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                />
+                <path
+                  d="M5 27v-2a10 10 0 0 1 20 0v2"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                />
+                <path
+                  d="M22 16l4 4-4 4"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                />
+              </svg>
+            </div>
+            <h3>Personal Protection</h3>
+            <p>
+              Dedicated close-protection officers providing discreet,
+              professional bodyguard services.
+            </p>
+          </div>
+          <div class="service-card reveal delay-3">
+            <div class="svc-icon">
+              <svg
+                viewBox="0 0 30 30"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M5 14c0-5 3-8 7-8 2 0 4 1 5 3l4-1a2 2 0 0 1 2 2v3l1 1v4l-2 1-1 3H7l-1-3-1-1V14z"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                />
+                <circle
+                  cx="12"
+                  cy="14"
+                  r="1"
+                  fill="currentColor"
+                  stroke="currentColor"
+                  stroke-width="1"
+                />
+                <circle
+                  cx="18"
+                  cy="14"
+                  r="1"
+                  fill="currentColor"
+                  stroke="currentColor"
+                  stroke-width="1"
+                />
+                <path
+                  d="M12 18s1.5 2 3 2 3-2 3-2"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                />
+                <path
+                  d="M7 24l-3 4M23 24l3 4"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                />
+              </svg>
+            </div>
+            <h3>K9 Security Unit</h3>
+            <p>
+              Expertly trained security dogs and handlers for perimeter patrol,
+              detection, and deterrence.
+            </p>
+          </div>
         </div>
-
-        <div class="card">
-          <div class="icon">🏠</div>
-          <h3>Residential Security</h3>
-          <p>24/7 home and community protection.</p>
+        <div class="services-cta reveal">
+          <a href="#contact" class="btn-primary">Request a Quote</a>
         </div>
       </div>
     </section>
 
-    <!-- TRUST -->
-    <section class="section">
-      <h2>Why Choose Us</h2>
+    <!-- CTA BAND -->
+    <div class="cta-band" id="contact">
+      <div class="cta-band-inner">
+        <div class="reveal-left">
+          <h2>Ready to enhance your security?</h2>
+          <p>
+            Contact our team today for a tailored security assessment and
+            proposal.
+          </p>
+        </div>
+        <a href="mailto:info@gldsecurity.lu" class="btn-dark reveal-right"
+          >Write to Us</a
+        >
+      </div>
+    </div>
 
-      <div class="trust">
-        <div class="card">✔ Licensed Staff</div>
-        <div class="card">✔ 24/7 Monitoring</div>
-        <div class="card">✔ Trusted Protection</div>
+    <!-- NEWS -->
+    <section class="news" id="news">
+      <div class="section-inner">
+        <div class="news-head reveal">
+          <span class="section-label">Latest Updates</span>
+          <h2 class="section-title">News</h2>
+          <div
+            class="divider-bar"
+            style="
+              width: 44px;
+              height: 3px;
+              background: var(--gold);
+              border-radius: 2px;
+              margin: 14px auto 0;
+            "
+          ></div>
+        </div>
+        <div class="news-grid">
+          <div class="news-card reveal delay-1">
+            <div class="news-img">
+              <svg viewBox="0 0 400 190" fill="none">
+                <rect width="400" height="190" fill="#1a2a3a" />
+                <circle
+                  cx="200"
+                  cy="80"
+                  r="48"
+                  fill="rgba(232,160,32,.08)"
+                  stroke="rgba(232,160,32,.25)"
+                  stroke-width="1.5"
+                />
+                <circle
+                  cx="200"
+                  cy="80"
+                  r="28"
+                  fill="rgba(232,160,32,.06)"
+                  stroke="rgba(232,160,32,.15)"
+                  stroke-width="1"
+                />
+                <path
+                  d="M186 80l10 10 18-18"
+                  stroke="#e8a020"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <rect
+                  x="60"
+                  y="145"
+                  width="280"
+                  height="28"
+                  rx="4"
+                  fill="rgba(255,255,255,.04)"
+                />
+                <rect
+                  x="70"
+                  y="153"
+                  width="160"
+                  height="5"
+                  rx="3"
+                  fill="rgba(255,255,255,.13)"
+                />
+                <rect
+                  x="70"
+                  y="162"
+                  width="110"
+                  height="3.5"
+                  rx="2"
+                  fill="rgba(255,255,255,.07)"
+                />
+                <circle
+                  cx="330"
+                  cy="159"
+                  r="9"
+                  fill="rgba(232,160,32,.18)"
+                  stroke="rgba(232,160,32,.45)"
+                  stroke-width="1"
+                />
+                <path
+                  d="M327 159l2.5 2.5 4.5-4.5"
+                  stroke="#e8a020"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              <span class="news-tag">CSR</span>
+            </div>
+            <div class="news-body">
+              <div class="news-date">December 29, 2021</div>
+              <h3>€1,000 Donation to Fondatioun Kriibskrank Kanner</h3>
+              <p>
+                GLD Security had the pleasure of welcoming Mr. Romain Henrion
+                for the handover of a €1,000 cheque to support children with
+                cancer...
+              </p>
+            </div>
+          </div>
+          <div class="news-card reveal delay-2">
+            <div class="news-img">
+              <svg viewBox="0 0 400 190" fill="none">
+                <rect width="400" height="190" fill="#162030" />
+                <rect
+                  x="130"
+                  y="55"
+                  width="140"
+                  height="76"
+                  rx="7"
+                  fill="rgba(232,160,32,.07)"
+                  stroke="rgba(232,160,32,.22)"
+                  stroke-width="1.5"
+                />
+                <rect
+                  x="147"
+                  y="70"
+                  width="106"
+                  height="46"
+                  rx="4"
+                  fill="rgba(232,160,32,.05)"
+                  stroke="rgba(232,160,32,.15)"
+                  stroke-width="1"
+                />
+                <text
+                  x="200"
+                  y="91"
+                  text-anchor="middle"
+                  fill="#e8a020"
+                  font-size="11"
+                  font-family="Inter,sans-serif"
+                  font-weight="700"
+                  opacity=".8"
+                >
+                  MADE IN
+                </text>
+                <text
+                  x="200"
+                  y="107"
+                  text-anchor="middle"
+                  fill="#e8a020"
+                  font-size="10"
+                  font-family="Inter,sans-serif"
+                  opacity=".55"
+                >
+                  LUXEMBOURG
+                </text>
+                <circle cx="80" cy="50" r="3" fill="rgba(232,160,32,.4)" />
+                <circle cx="320" cy="50" r="3" fill="rgba(232,160,32,.4)" />
+                <circle cx="80" cy="150" r="3" fill="rgba(232,160,32,.3)" />
+                <circle cx="320" cy="150" r="3" fill="rgba(232,160,32,.3)" />
+              </svg>
+              <span class="news-tag">Award</span>
+            </div>
+            <div class="news-body">
+              <div class="news-date">December 13, 2021</div>
+              <h3>Proud Recipients of the "Made In Luxembourg" Label</h3>
+              <p>
+                GLD Security S.à.r.l., established in Luxembourg since December
+                2011, has been awarded the prestigious Made In Luxembourg
+                label...
+              </p>
+            </div>
+          </div>
+          <div class="news-card reveal delay-3">
+            <div class="news-img">
+              <svg viewBox="0 0 400 190" fill="none">
+                <rect width="400" height="190" fill="#1e2d3d" />
+                <path
+                  d="M200 128 C162 108 132 88 132 66 C132 50 145 40 162 48 C172 53 180 61 200 78 C220 61 228 53 238 48 C255 40 268 50 268 66 C268 88 238 108 200 128Z"
+                  fill="rgba(192,57,43,.18)"
+                  stroke="rgba(192,57,43,.45)"
+                  stroke-width="1.5"
+                />
+                <path
+                  d="M186 74l8 8 16-16"
+                  stroke="#e8a020"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <text
+                  x="200"
+                  y="158"
+                  text-anchor="middle"
+                  fill="rgba(232,160,32,.4)"
+                  font-size="10"
+                  font-family="Inter,sans-serif"
+                  letter-spacing="2"
+                >
+                  EUROPA DONNA
+                </text>
+              </svg>
+              <span class="news-tag">Charity</span>
+            </div>
+            <div class="news-body">
+              <div class="news-date">December 9, 2021</div>
+              <h3>Donation in Support of Europa Donna Luxembourg</h3>
+              <p>
+                GLD Security had the pleasure of welcoming Ms. Mariette
+                Fischbach, President of Europa Donna Luxembourg, for a cheque
+                handover...
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- CONTACT -->
-    <section class="section" id="contact">
-      <h2>Contact Us</h2>
-
-      <form>
-        <input type="text" placeholder="Name" />
-        <input type="email" placeholder="Email" />
-        <textarea placeholder="Message"></textarea>
-        <button>Send Request</button>
-      </form>
-
-      <p>📍 Luxembourg</p>
-      <p>📞 +91 94342 48278</p>
-    </section>
-
+    <!-- FOOTER -->
     <footer>
-      <p>© 2026 GLD Security Service</p>
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#" class="logo" style="display: inline-flex">
+            <svg class="logo-mark" viewBox="0 0 40 40" fill="none">
+              <path
+                d="M20 3L3 10v10c0 10 7 18 17 20 10-2 17-10 17-20V10L20 3z"
+                fill="rgba(232,160,32,.15)"
+                stroke="#e8a020"
+                stroke-width="1.6"
+              />
+              <path
+                d="M14 20l4 4 8-8"
+                stroke="#e8a020"
+                stroke-width="2.4"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            <div class="logo-text">GLD Security<span>Luxembourg</span></div>
+          </a>
+          <p>
+            Your safety is our responsibility. Professional security services
+            across Luxembourg since 2011.
+          </p>
+          <div class="f-contact">
+            <p>43-45 Op Zaemer<br />4959 Bascharage / Nidderkäerjeng</p>
+            <p><a href="mailto:info@gldsecurity.lu">info@gldsecurity.lu</a></p>
+            <p style="margin-top: 12px; font-size: 11.5px">
+              Authorisation Gouv. No: 10021011/3<br />TVA N° 20112442724 ·
+              Capital: €12,500<br />Member of FEDIL
+            </p>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Services</h4>
+          <a href="#">Reception &amp; Access Control</a>
+          <a href="#">Event &amp; Personal Security</a>
+          <a href="#">General Surveillance</a>
+          <a href="#">Mobile Security</a>
+          <a href="#">Personal Protection</a>
+          <a href="#">K9 Security Unit</a>
+        </div>
+        <div class="footer-col">
+          <h4>Find Us</h4>
+          <div class="footer-map">
+            <iframe
+              src="https://maps.google.com/maps?q=4959+Bascharage+Luxembourg&t=&z=13&ie=UTF8&iwloc=&output=embed"
+              loading="lazy"
+              title="GLD Security Location"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>
+          Copyright &copy; 2024 GLD Security Luxembourg · All Rights Reserved
+        </p>
+        <p class="footer-legal">
+          S.à.r.l. · TVA N° 20112442724 · Authorisation Gouv. N°: 10021011/3
+        </p>
+      </div>
     </footer>
+
+    <!-- SCROLL TO TOP -->
+    <button
+      id="scrollTop"
+      aria-label="Scroll to top"
+      onclick="window.scrollTo({top:0,behavior:'smooth'})"
+    >
+      <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15" /></svg>
+    </button>
+
+    <script>
+      // ── Mobile menu ──
+      function toggleMenu() {
+        const m = document.getElementById("mobileMenu");
+        const h = document.querySelector(".ham");
+        m.classList.toggle("active");
+        h.classList.toggle("open");
+      }
+      function closeMenu() {
+        document.getElementById("mobileMenu").classList.remove("active");
+        document.querySelector(".ham").classList.remove("open");
+      }
+
+      // ── Smooth scroll for nav links ──
+      document.querySelectorAll('a[href^="#"]').forEach((a) => {
+        a.addEventListener("click", (e) => {
+          const id = a.getAttribute("href");
+          if (id === "#") return;
+          const t = document.querySelector(id);
+          if (t) {
+            e.preventDefault();
+            t.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        });
+      });
+
+      // ── Scroll-to-top button visibility ──
+      const st = document.getElementById("scrollTop");
+      window.addEventListener(
+        "scroll",
+        () => {
+          st.classList.toggle("visible", window.scrollY > 400);
+        },
+        { passive: true }
+      );
+
+      // ── Intersection observer for reveal animations ──
+      const revealObs = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add("in");
+              revealObs.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+      );
+      document
+        .querySelectorAll(".reveal,.reveal-left,.reveal-right")
+        .forEach((el) => revealObs.observe(el));
+
+      // ── Animated counters ──
+      const cntObs = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            const el = entry.target;
+            const target = parseInt(el.dataset.target);
+            const suffix = el.dataset.suffix || "";
+            let current = 0;
+            const duration = 1800;
+            const step = 16;
+            const increment = target / (duration / step);
+            const timer = setInterval(() => {
+              current += increment;
+              if (current >= target) {
+                el.textContent = target + suffix;
+                clearInterval(timer);
+              } else {
+                el.textContent = Math.floor(current) + suffix;
+              }
+            }, step);
+            cntObs.unobserve(el);
+          });
+        },
+        { threshold: 0.5 }
+      );
+      document
+        .querySelectorAll(".stat-num[data-target]")
+        .forEach((el) => cntObs.observe(el));
+
+      // ── Service card stagger on mobile ──
+      if (window.innerWidth <= 600) {
+        document.querySelectorAll(".service-card").forEach((c, i) => {
+          c.style.transitionDelay = `${i * 0.07}s`;
+        });
+      }
+    </script>
   </body>
 </html>
