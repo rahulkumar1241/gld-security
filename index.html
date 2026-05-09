@@ -141,46 +141,278 @@ nav{background:var(--navy);position:sticky;top:0;z-index:200;box-shadow:0 2px 24
 .service-card p{font-size:13px;color:rgba(255,255,255,.48);line-height:1.75}
 .services-cta{text-align:center;margin-top:48px}
 
-/* ─── SECURITY BANNER ─── */
-.security-banner{position:relative;overflow:hidden;height:480px;background:var(--navy)}
-.security-banner-bg{position:absolute;inset:0;display:flex;align-items:stretch}
-/* Left panel: guard illustration */
-.banner-guard{flex:1;position:relative;background:linear-gradient(135deg,#0d1b2a 0%,#1a2e45 60%,#0d1b2a 100%);display:flex;align-items:flex-end;justify-content:center;overflow:hidden}
-.banner-guard::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 30%,rgba(232,160,32,.08) 0%,transparent 65%)}
-/* Tactical grid overlay */
-.banner-guard-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(232,160,32,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(232,160,32,.03) 1px,transparent 1px);background-size:40px 40px}
-/* Right panel: car illustration */
-.banner-car{flex:1;position:relative;background:linear-gradient(135deg,#111f2e 0%,#0d1b2a 100%);display:flex;align-items:center;justify-content:center;overflow:hidden}
-.banner-car::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 70%,rgba(232,160,32,.06) 0%,transparent 60%)}
-/* Divider line between panels */
-.banner-divider{position:absolute;left:50%;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,transparent,rgba(232,160,32,.5) 30%,rgba(232,160,32,.5) 70%,transparent);z-index:5}
-/* Banner overlay text */
-.banner-overlay{position:absolute;inset:0;z-index:10;display:flex;align-items:center;justify-content:center;pointer-events:none}
-.banner-tagline{text-align:center;background:rgba(13,27,42,.7);border:1px solid rgba(232,160,32,.25);backdrop-filter:blur(10px);border-radius:var(--radius-lg);padding:20px 40px}
-.banner-tagline span{display:block;font-size:10px;font-weight:700;color:var(--gold);letter-spacing:4px;text-transform:uppercase;margin-bottom:8px}
-.banner-tagline h3{font-size:clamp(18px,2.5vw,28px);font-weight:800;color:white;line-height:1.2}
-/* Guard SVG figure */
-.guard-figure{position:absolute;bottom:0;left:50%;transform:translateX(-50%);z-index:3}
-/* Spotlight beam under guard */
-.spotlight{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:200px;height:320px;background:radial-gradient(ellipse at 50% 100%,rgba(232,160,32,.12) 0%,transparent 70%);z-index:2}
-/* Scan line animation */
-.scan-line{position:absolute;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(232,160,32,.4),transparent);animation:scan 3s linear infinite;z-index:4}
-@keyframes scan{0%{top:-10px;opacity:0}10%{opacity:1}90%{opacity:1}100%{top:100%;opacity:0}}
-/* Flashing corner brackets */
-.bracket{position:absolute;width:20px;height:20px;border-color:rgba(232,160,32,.5);border-style:solid;z-index:6}
-.bracket.tl{top:20px;left:20px;border-width:2px 0 0 2px}
-.bracket.tr{top:20px;right:20px;border-width:2px 2px 0 0}
-.bracket.bl{bottom:20px;left:20px;border-width:0 0 2px 2px}
-.bracket.br{bottom:20px;right:20px;border-width:0 2px 2px 0}
-/* Car road/ground */
-.car-road{position:absolute;bottom:0;left:0;right:0;height:80px;background:linear-gradient(to top,rgba(0,0,0,.5),transparent)}
-.car-road-line{position:absolute;bottom:36px;left:-100%;right:-100%;height:2px;background:repeating-linear-gradient(90deg,transparent 0,transparent 40px,rgba(232,160,32,.3) 40px,rgba(232,160,32,.3) 80px);animation:road-move 2s linear infinite}
-@keyframes road-move{from{transform:translateX(0)}to{transform:translateX(80px)}}
-/* Car headlight glow */
-.car-light-l,.car-light-r{position:absolute;width:80px;height:60px;border-radius:50%;background:rgba(245,192,96,.06);filter:blur(18px);bottom:95px;animation:headlight-pulse 2s ease-in-out infinite}
-.car-light-l{left:calc(50% - 130px)}
-.car-light-r{right:calc(50% - 130px);animation-delay:.3s}
-@keyframes headlight-pulse{0%,100%{opacity:.6}50%{opacity:1}}
+/* ═══════════════════════════════════════
+   SECURITY BANNER — FULLY RESPONSIVE
+═══════════════════════════════════════ */
+.security-banner {
+  background: #06101a;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Responsive two-column scene */
+.sb-scene {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 400px;
+  position: relative;
+}
+
+/* Left half: guard + text */
+.sb-left {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 40px 20px 0;
+  background: linear-gradient(135deg, #06101a 0%, #0d2035 100%);
+  overflow: hidden;
+  min-height: 340px;
+}
+
+/* subtle gold grid overlay */
+.sb-left::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(232,160,32,.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(232,160,32,.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+}
+
+.sb-left::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  background: linear-gradient(to top, #06101a, transparent);
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* Right half: car */
+.sb-right {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 30px 20px 0;
+  background: linear-gradient(135deg, #0a1820 0%, #06101a 100%);
+  overflow: hidden;
+  min-height: 340px;
+}
+
+.sb-right::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  background: linear-gradient(to top, #06101a, transparent);
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* Center divider */
+.sb-divider {
+  position: absolute;
+  left: 50%;
+  top: 10%;
+  bottom: 10%;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, rgba(232,160,32,.4), transparent);
+  z-index: 10;
+  transform: translateX(-50%);
+}
+
+/* SVG figures */
+.sb-guard-svg {
+  width: 100%;
+  max-width: 360px;
+  height: auto;
+  position: relative;
+  z-index: 2;
+  display: block;
+}
+
+.sb-car-svg {
+  width: 100%;
+  max-width: 520px;
+  height: auto;
+  position: relative;
+  z-index: 2;
+  display: block;
+}
+
+/* Road strip at base of scene */
+.sb-road {
+  background: #06101a;
+  padding: 0 0 0;
+  position: relative;
+}
+
+.sb-road-strip {
+  height: 56px;
+  background: #09141e;
+  display: flex;
+  align-items: center;
+  padding: 0 40px;
+  gap: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.sb-road-strip::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: rgba(232,160,32,.15);
+}
+
+.sb-road-dash {
+  flex: 1;
+  height: 4px;
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(232,160,32,.35) 0px,
+    rgba(232,160,32,.35) 60px,
+    transparent 60px,
+    transparent 110px
+  );
+  animation: sb-road-move 1.8s linear infinite;
+}
+
+@keyframes sb-road-move {
+  from { background-position: 0 0; }
+  to   { background-position: 110px 0; }
+}
+
+/* Tagline overlay box */
+.sb-tagline-wrap {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+  pointer-events: none;
+}
+
+.sb-tagline {
+  background: rgba(6,16,26,.72);
+  border: 1px solid rgba(232,160,32,.28);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 14px;
+  padding: clamp(16px, 2.5vw, 28px) clamp(20px, 4vw, 52px);
+  text-align: center;
+  max-width: min(640px, 85vw);
+}
+
+.sb-tagline-label {
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.sb-tagline-headline {
+  font-size: clamp(18px, 2.8vw, 30px);
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.sb-tagline-headline em {
+  font-style: normal;
+  color: var(--gold);
+}
+
+.sb-tagline-sub {
+  display: block;
+  font-size: clamp(11px, 1.2vw, 13px);
+  color: rgba(255,255,255,.45);
+  margin-top: 8px;
+  letter-spacing: .5px;
+}
+
+/* Stars layer */
+.sb-stars {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Scan line */
+.sb-scan {
+  position: absolute;
+  left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(232,160,32,.35), transparent);
+  animation: sb-scan 4s linear infinite;
+  z-index: 5;
+  pointer-events: none;
+}
+
+@keyframes sb-scan {
+  0%   { top: -4px; opacity: 0; }
+  5%   { opacity: 1; }
+  95%  { opacity: .6; }
+  100% { top: 100%; opacity: 0; }
+}
+
+/* Corner brackets */
+.sb-bracket {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-color: rgba(232,160,32,.45);
+  border-style: solid;
+  z-index: 15;
+}
+.sb-bracket.tl { top: 14px; left: 14px; border-width: 2px 0 0 2px; }
+.sb-bracket.tr { top: 14px; right: 14px; border-width: 2px 2px 0 0; }
+.sb-bracket.bl { bottom: 14px; left: 14px; border-width: 0 0 2px 2px; }
+.sb-bracket.br { bottom: 14px; right: 14px; border-width: 0 2px 2px 0; }
+
+/* ── Responsive stacking ── */
+@media (max-width: 780px) {
+  .sb-scene {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+  .sb-left {
+    min-height: 260px;
+    padding: 30px 16px 0;
+  }
+  .sb-right {
+    min-height: 200px;
+    padding: 20px 16px 0;
+  }
+  .sb-divider { display: none; }
+  .sb-guard-svg { max-width: 240px; }
+  .sb-car-svg  { max-width: 340px; }
+  .sb-bracket  { display: none; }
+}
+
+@media (max-width: 480px) {
+  .sb-left  { min-height: 220px; }
+  .sb-right { min-height: 160px; }
+  .sb-guard-svg { max-width: 180px; }
+  .sb-car-svg  { max-width: 260px; }
+  .sb-road-strip { height: 40px; padding: 0 20px; }
+}
 
 /* ─── CTA BAND ─── */
 .cta-band{background:var(--gold);padding:56px 0;position:relative;overflow:hidden}
@@ -200,21 +432,59 @@ nav{background:var(--navy);position:sticky;top:0;z-index:200;box-shadow:0 2px 24
 .team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
 .team-card{border-radius:var(--radius-lg);overflow:hidden;border:1px solid rgba(0,0,0,.07);transition:all .35s;background:var(--white);position:relative}
 .team-card:hover{box-shadow:0 18px 50px rgba(0,0,0,.12);transform:translateY(-6px)}
-.team-photo{position:relative;height:220px;background:var(--navy-mid);overflow:hidden;display:flex;align-items:center;justify-content:center}
-.team-photo-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;position:relative;overflow:hidden}
-/* Subtle gradient bg for placeholder */
-.team-card:nth-child(1) .team-photo-placeholder{background:linear-gradient(145deg,#0d1b2a,#1e3a5a)}
-.team-card:nth-child(2) .team-photo-placeholder{background:linear-gradient(145deg,#1a2a1a,#1e3d1e)}
-.team-card:nth-child(3) .team-photo-placeholder{background:linear-gradient(145deg,#2a1a1a,#3d1e1e)}
-.team-card:nth-child(4) .team-photo-placeholder{background:linear-gradient(145deg,#1a1a2a,#1e1e3d)}
-.team-avatar-ring{width:88px;height:88px;border-radius:50%;border:2px solid rgba(232,160,32,.4);display:flex;align-items:center;justify-content:center;position:relative;z-index:2}
-.team-avatar-ring::before{content:'';position:absolute;inset:-6px;border-radius:50%;border:1px dashed rgba(232,160,32,.2);animation:spin-slow 12s linear infinite}
-.team-avatar-icon{width:88px;height:88px;border-radius:50%;background:rgba(232,160,32,.1);display:flex;align-items:center;justify-content:center}
-.team-avatar-icon svg{width:42px;height:42px;stroke:rgba(232,160,32,.7);fill:none;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round}
-/* Upload badge */
-.photo-upload-hint{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.55);border:1px dashed rgba(232,160,32,.4);border-radius:20px;padding:4px 12px;font-size:10px;color:rgba(232,160,32,.75);white-space:nowrap;backdrop-filter:blur(4px);letter-spacing:.5px}
-.team-card:hover .photo-upload-hint{background:rgba(13,27,42,.8);border-color:rgba(232,160,32,.7);color:var(--gold-light)}
-/* Gold accent bar on top of card */
+.team-photo{position:relative;height:240px;overflow:hidden;display:flex;align-items:flex-end;justify-content:center}
+
+/* Per-card gradient backgrounds */
+.team-card:nth-child(1) .team-photo{background:linear-gradient(160deg,#0d1b2a 0%,#1a3a5a 60%,#1e4570 100%)}
+.team-card:nth-child(2) .team-photo{background:linear-gradient(160deg,#0e1f0e 0%,#163416 60%,#1c4020 100%)}
+.team-card:nth-child(3) .team-photo{background:linear-gradient(160deg,#1f0e0e 0%,#341616 60%,#401c1c 100%)}
+.team-card:nth-child(4) .team-photo{background:linear-gradient(160deg,#14102a 0%,#221838 60%,#2c1f48 100%)}
+
+/* Subtle pattern overlay */
+.team-photo::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.015) 1px, transparent 1px);
+  background-size:20px 20px;
+  z-index:1;
+}
+
+/* Radial glow from bottom */
+.team-photo::after{
+  content:'';
+  position:absolute;
+  bottom:-20px;
+  left:50%;
+  transform:translateX(-50%);
+  width:160px;
+  height:160px;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(232,160,32,.15) 0%, transparent 70%);
+  z-index:1;
+  pointer-events:none;
+}
+
+.team-avatar-svg{
+  position:relative;
+  z-index:2;
+  width:100%;
+  height:100%;
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+}
+
+.team-avatar-svg svg{
+  width:auto;
+  height:100%;
+  max-height:240px;
+  display:block;
+}
+
+/* Gold top bar on hover */
 .team-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-light));opacity:0;transition:opacity .35s;z-index:10}
 .team-card:hover::before{opacity:1}
 .team-info{padding:20px 18px 22px}
@@ -280,18 +550,23 @@ footer{background:var(--navy);padding:64px 0 0}
   .nav-links{display:none}
   .ham{display:flex}
   .topbar .tw{justify-content:center}
-  .team-grid{grid-template-columns:repeat(2,1fr)}
-  .security-banner{height:auto;min-height:300px}
-  .security-banner-bg{flex-direction:column}
-  .banner-guard,.banner-car{min-height:240px}
-  .banner-divider{display:none}
+  .team-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+  .team-photo{height:220px}
 }
 @media(max-width:600px){
   .services-grid{grid-template-columns:1fr}
   .news-grid{grid-template-columns:1fr}
   .values-grid{grid-template-columns:1fr}
   .stats-inner{grid-template-columns:1fr}
-  .team-grid{grid-template-columns:1fr 1fr}
+  .team{padding:70px 0}
+  .team-grid{grid-template-columns:1fr;gap:20px}
+  .team-card{border-radius:16px}
+  .team-photo{height:200px}
+  .team-info{padding:18px 16px 20px;text-align:center}
+  .team-info h3{font-size:15px}
+  .team-role{font-size:11px;margin-bottom:8px}
+  .team-bio{font-size:12px;line-height:1.65}
+  .team-social{justify-content:center;margin-top:12px}
   .stat-item{border-right:none;border-bottom:1px solid rgba(255,255,255,.07);padding:0 20px 20px;margin-bottom:16px}
   .stat-item:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
   .hero h1{font-size:32px}
@@ -320,12 +595,6 @@ footer{background:var(--navy);padding:64px 0 0}
 <div class="topbar">
   <div class="tw">
     <div class="tb-left">
-      <a href="https://facebook.com" class="si" aria-label="Facebook">
-        <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-      </a>
-      <a href="https://instagram.com" class="si" aria-label="Instagram">
-        <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-      </a>
     </div>
     <a href="mailto:info@gldsecurity.lu">info@gldsecurity.lu</a>
   </div>
@@ -577,427 +846,289 @@ footer{background:var(--navy);padding:64px 0 0}
   </div>
 </section>
 
-<!-- ═══ SECURITY BANNER ═══ -->
-<div style="position:relative;overflow:hidden;background:#06101a;line-height:0">
-  <svg width="100%" viewBox="0 0 1400 520" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <!-- Night sky gradient -->
-      <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="#06101a"/>
-        <stop offset="100%" stop-color="#0d1f30"/>
-      </linearGradient>
-      <!-- Ground gradient -->
-      <linearGradient id="ground" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="#0a1520"/>
-        <stop offset="100%" stop-color="#050d14"/>
-      </linearGradient>
-      <!-- Headlight cone left -->
-      <radialGradient id="hl" cx="0%" cy="50%" r="100%">
-        <stop offset="0%" stop-color="#f5c060" stop-opacity="0.25"/>
-        <stop offset="100%" stop-color="#f5c060" stop-opacity="0"/>
-      </radialGradient>
-      <!-- Headlight cone right -->
-      <radialGradient id="hr" cx="100%" cy="50%" r="100%">
-        <stop offset="0%" stop-color="#e03030" stop-opacity="0.18"/>
-        <stop offset="100%" stop-color="#e03030" stop-opacity="0"/>
-      </radialGradient>
-      <!-- Ground spotlight under guard -->
-      <radialGradient id="spot" cx="50%" cy="100%" r="60%">
-        <stop offset="0%" stop-color="#e8a020" stop-opacity="0.12"/>
-        <stop offset="100%" stop-color="#e8a020" stop-opacity="0"/>
-      </radialGradient>
-      <!-- Building window glow -->
-      <radialGradient id="winglow" cx="50%" cy="50%" r="50%">
-        <stop offset="0%" stop-color="#c8d8f0" stop-opacity="0.55"/>
-        <stop offset="100%" stop-color="#c8d8f0" stop-opacity="0.05"/>
-      </radialGradient>
-    </defs>
 
-    <!-- SKY -->
-    <rect width="1400" height="520" fill="url(#sky)"/>
+<!-- ═══════════════════════════════════════════
+     SECURITY BANNER — CSS-GRID RESPONSIVE
+═══════════════════════════════════════════ -->
+<div class="security-banner">
 
-    <!-- STARS -->
-    <circle cx="80" cy="40" r="1" fill="white" opacity="0.5"/>
-    <circle cx="200" cy="25" r="1.2" fill="white" opacity="0.4"/>
-    <circle cx="350" cy="55" r="0.8" fill="white" opacity="0.6"/>
-    <circle cx="520" cy="18" r="1" fill="white" opacity="0.35"/>
-    <circle cx="680" cy="38" r="1.2" fill="white" opacity="0.45"/>
-    <circle cx="820" cy="22" r="0.9" fill="white" opacity="0.5"/>
-    <circle cx="970" cy="48" r="1" fill="white" opacity="0.4"/>
-    <circle cx="1100" cy="30" r="1.3" fill="white" opacity="0.35"/>
-    <circle cx="1260" cy="55" r="0.8" fill="white" opacity="0.55"/>
-    <circle cx="1380" cy="20" r="1" fill="white" opacity="0.4"/>
-    <circle cx="140" cy="80" r="0.7" fill="white" opacity="0.3"/>
-    <circle cx="460" cy="70" r="0.9" fill="white" opacity="0.35"/>
-    <circle cx="740" cy="65" r="0.7" fill="white" opacity="0.4"/>
-    <circle cx="1050" cy="75" r="1" fill="white" opacity="0.3"/>
-    <circle cx="1320" cy="85" r="0.8" fill="white" opacity="0.35"/>
+  <!-- Corner brackets (hidden on small screens via CSS) -->
+  <div class="sb-bracket tl"></div>
+  <div class="sb-bracket tr"></div>
+  <div class="sb-bracket bl"></div>
+  <div class="sb-bracket br"></div>
 
-    <!-- MOON -->
-    <circle cx="1280" cy="55" r="30" fill="#d4e4f7" opacity="0.12"/>
-    <circle cx="1280" cy="55" r="22" fill="#e8f2ff" opacity="0.18"/>
-    <circle cx="1270" cy="48" r="18" fill="#06101a" opacity="0.45"/>
+  <!-- Animated scan line -->
+  <div class="sb-scan"></div>
 
-    <!-- DISTANT CITY SKYLINE -->
-    <!-- Tall buildings background -->
-    <rect x="50" y="200" width="40" height="160" fill="#0c1e2e" opacity="0.8"/>
-    <rect x="100" y="180" width="55" height="180" fill="#0d2035" opacity="0.85"/>
-    <rect x="165" y="210" width="35" height="150" fill="#0b1c2c" opacity="0.8"/>
-    <rect x="210" y="165" width="65" height="195" fill="#0e2238" opacity="0.9"/>
-    <rect x="285" y="195" width="42" height="165" fill="#0c1e2e" opacity="0.8"/>
-    <rect x="1020" y="190" width="45" height="170" fill="#0c1e2e" opacity="0.8"/>
-    <rect x="1075" y="170" width="60" height="190" fill="#0d2035" opacity="0.85"/>
-    <rect x="1145" y="205" width="38" height="155" fill="#0b1c2c" opacity="0.8"/>
-    <rect x="1195" y="160" width="70" height="200" fill="#0e2238" opacity="0.9"/>
-    <rect x="1275" y="195" width="45" height="165" fill="#0c1e2e" opacity="0.8"/>
-    <rect x="1330" y="180" width="55" height="180" fill="#0d2035" opacity="0.85"/>
-    <!-- Building windows (lit) -->
-    <rect x="218" y="178" width="6" height="5" rx="1" fill="url(#winglow)"/>
-    <rect x="230" y="178" width="6" height="5" rx="1" fill="url(#winglow)" opacity="0.6"/>
-    <rect x="218" y="192" width="6" height="5" rx="1" fill="url(#winglow)" opacity="0.7"/>
-    <rect x="242" y="185" width="6" height="5" rx="1" fill="url(#winglow)"/>
-    <rect x="108" y="194" width="5" height="4" rx="1" fill="url(#winglow)" opacity="0.5"/>
-    <rect x="120" y="194" width="5" height="4" rx="1" fill="url(#winglow)"/>
-    <rect x="108" y="207" width="5" height="4" rx="1" fill="url(#winglow)" opacity="0.65"/>
-    <rect x="1203" y="174" width="6" height="5" rx="1" fill="url(#winglow)"/>
-    <rect x="1215" y="174" width="6" height="5" rx="1" fill="url(#winglow)" opacity="0.6"/>
-    <rect x="1203" y="188" width="6" height="5" rx="1" fill="url(#winglow)" opacity="0.7"/>
-    <rect x="1227" y="182" width="6" height="5" rx="1" fill="url(#winglow)"/>
-    <rect x="1083" y="185" width="5" height="4" rx="1" fill="url(#winglow)" opacity="0.5"/>
-    <rect x="1095" y="185" width="5" height="4" rx="1" fill="url(#winglow)"/>
+  <!-- Two-column scene -->
+  <div class="sb-scene">
 
-    <!-- GROUND / ROAD -->
-    <rect x="0" y="360" width="1400" height="160" fill="url(#ground)"/>
-    <!-- Road surface -->
-    <rect x="0" y="380" width="1400" height="90" fill="#09141e" opacity="0.9"/>
-    <!-- Road center line -->
-    <rect x="0" y="423" width="1400" height="3" fill="#e8a020" opacity="0.2"/>
-    <!-- Road dashes -->
-    <rect x="0" y="421" width="80" height="6" rx="2" fill="#e8a020" opacity="0.35"/>
-    <rect x="160" y="421" width="80" height="6" rx="2" fill="#e8a020" opacity="0.35"/>
-    <rect x="320" y="421" width="80" height="6" rx="2" fill="#e8a020" opacity="0.35"/>
-    <rect x="480" y="421" width="80" height="6" rx="2" fill="#e8a020" opacity="0.35"/>
-    <rect x="640" y="421" width="80" height="6" rx="2" fill="#e8a020" opacity="0.35"/>
-    <rect x="800" y="421" width="80" height="6" rx="2" fill="#e8a020" opacity="0.35"/>
-    <rect x="960" y="421" width="80" height="6" rx="2" fill="#e8a020" opacity="0.35"/>
-    <rect x="1120" y="421" width="80" height="6" rx="2" fill="#e8a020" opacity="0.35"/>
-    <rect x="1280" y="421" width="80" height="6" rx="2" fill="#e8a020" opacity="0.35"/>
-    <!-- Pavement kerb -->
-    <rect x="0" y="378" width="1400" height="5" fill="#1a2e42" opacity="0.7"/>
-    <!-- Ground reflection glow under car -->
-    <ellipse cx="830" cy="476" rx="240" ry="18" fill="#e8a020" opacity="0.07"/>
+    <!-- Stars scattered across both halves -->
+    <svg class="sb-stars" viewBox="0 0 1200 420" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <circle cx="60"  cy="30"  r="1"   fill="white" opacity=".5"/>
+      <circle cx="180" cy="18"  r="1.2" fill="white" opacity=".4"/>
+      <circle cx="310" cy="45"  r=".8"  fill="white" opacity=".6"/>
+      <circle cx="480" cy="14"  r="1"   fill="white" opacity=".35"/>
+      <circle cx="620" cy="32"  r="1.2" fill="white" opacity=".45"/>
+      <circle cx="750" cy="20"  r=".9"  fill="white" opacity=".5"/>
+      <circle cx="900" cy="40"  r="1"   fill="white" opacity=".4"/>
+      <circle cx="1040" cy="25" r="1.3" fill="white" opacity=".35"/>
+      <circle cx="1160" cy="50" r=".8"  fill="white" opacity=".55"/>
+      <circle cx="120" cy="70"  r=".7"  fill="white" opacity=".3"/>
+      <circle cx="420" cy="60"  r=".9"  fill="white" opacity=".35"/>
+      <circle cx="700" cy="55"  r=".7"  fill="white" opacity=".4"/>
+      <circle cx="980" cy="65"  r="1"   fill="white" opacity=".3"/>
+      <!-- Moon -->
+      <circle cx="1120" cy="48" r="26"  fill="#d4e4f7" opacity=".1"/>
+      <circle cx="1120" cy="48" r="18"  fill="#e8f2ff" opacity=".15"/>
+      <circle cx="1112" cy="42" r="15"  fill="#06101a" opacity=".5"/>
+    </svg>
 
-    <!-- HEADLIGHT CONE LEFT -->
-    <polygon points="480,388 200,370 200,410 480,408" fill="url(#hl)" opacity="0.9"/>
-    <!-- REAR LIGHT GLOW -->
-    <ellipse cx="1140" cy="398" rx="45" ry="25" fill="#e03030" opacity="0.12"/>
+    <!-- ── LEFT: Guard ── -->
+    <div class="sb-left">
+      <!-- Guard SVG (same detailed illustration, made fluid) -->
+      <svg class="sb-guard-svg" viewBox="0 0 300 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Ground shadow -->
+        <ellipse cx="150" cy="392" rx="70" ry="10" fill="#000" opacity=".45"/>
+        <!-- BOOTS -->
+        <rect x="108" y="342" width="36" height="50" rx="8" fill="#0a1018"/>
+        <rect x="156" y="342" width="36" height="50" rx="8" fill="#0a1018"/>
+        <ellipse cx="126" cy="390" rx="20" ry="8" fill="#080e14"/>
+        <ellipse cx="174" cy="390" rx="20" ry="8" fill="#080e14"/>
+        <!-- LEGS -->
+        <rect x="112" y="230" width="32" height="118" rx="8" fill="#162236"/>
+        <rect x="156" y="230" width="32" height="118" rx="8" fill="#1a2840"/>
+        <line x1="128" y1="235" x2="128" y2="345" stroke="#1e3050" stroke-width="1" opacity=".6"/>
+        <line x1="172" y1="235" x2="172" y2="345" stroke="#1e3050" stroke-width="1" opacity=".6"/>
+        <!-- TORSO -->
+        <rect x="90" y="138" width="120" height="102" rx="14" fill="#1a2e44"/>
+        <!-- Lapels -->
+        <path d="M135,138 L122,170 L140,162Z" fill="#132236"/>
+        <path d="M165,138 L178,170 L160,162Z" fill="#132236"/>
+        <!-- Shirt/tie -->
+        <rect x="140" y="140" width="20" height="35" rx="3" fill="#eef2f8" opacity=".9"/>
+        <rect x="146" y="142" width="8" height="32" rx="2" fill="#0d1b2a" opacity=".85"/>
+        <!-- TACTICAL VEST -->
+        <rect x="96" y="144" width="108" height="90" rx="10" fill="#112030" stroke="#1e3a55" stroke-width="1.5"/>
+        <!-- Chest pockets -->
+        <rect x="104" y="155" width="38" height="26" rx="5" fill="#0e1e2e" stroke="#e8a020" stroke-width="1" opacity=".9"/>
+        <rect x="158" y="155" width="38" height="26" rx="5" fill="#0e1e2e" stroke="#e8a020" stroke-width="1" opacity=".9"/>
+        <!-- ID Badge -->
+        <rect x="111" y="190" width="78" height="38" rx="6" fill="#0d1b2a" stroke="#e8a020" stroke-width="1.5"/>
+        <rect x="115" y="194" width="70" height="20" rx="3" fill="#e8a020" opacity=".1"/>
+        <text x="150" y="207" text-anchor="middle" fill="#e8a020" font-family="Inter,sans-serif" font-weight="800" font-size="13">GLD</text>
+        <text x="150" y="220" text-anchor="middle" fill="#e8a020" font-family="Inter,sans-serif" font-size="7" letter-spacing="1" opacity=".8">SECURITY</text>
+        <!-- Zipper -->
+        <line x1="150" y1="144" x2="150" y2="232" stroke="#1e3a55" stroke-width="2"/>
+        <!-- EPAULETTES -->
+        <rect x="87" y="140" width="24" height="12" rx="4" fill="#e8a020" opacity=".75"/>
+        <rect x="189" y="140" width="24" height="12" rx="4" fill="#e8a020" opacity=".75"/>
+        <circle cx="93" cy="145" r="2" fill="#fff" opacity=".9"/>
+        <circle cx="101" cy="145" r="2" fill="#fff" opacity=".9"/>
+        <circle cx="195" cy="145" r="2" fill="#fff" opacity=".9"/>
+        <circle cx="203" cy="145" r="2" fill="#fff" opacity=".9"/>
+        <!-- LEFT ARM -->
+        <rect x="62" y="142" width="30" height="90" rx="12" fill="#1a2e44"/>
+        <ellipse cx="77" cy="238" rx="14" ry="11" fill="#0e1820"/>
+        <!-- RIGHT ARM + RADIO -->
+        <rect x="208" y="140" width="30" height="74" rx="12" fill="#1a2e44"/>
+        <rect x="210" y="106" width="26" height="44" rx="10" fill="#1e3248" transform="rotate(-16,223,128)"/>
+        <ellipse cx="228" cy="122" rx="13" ry="10" fill="#0e1820" transform="rotate(-16,228,122)"/>
+        <!-- Radio body -->
+        <rect x="230" y="72" width="24" height="48" rx="6" fill="#0d1b2a" stroke="#e8a020" stroke-width="1.5"/>
+        <rect x="234" y="77" width="16" height="6" rx="2" fill="#e8a020" opacity=".4"/>
+        <rect x="234" y="87" width="16" height="12" rx="2" fill="#091520" stroke="#1e3050" stroke-width=".5"/>
+        <line x1="236" y1="89" x2="248" y2="89" stroke="#1e3050" stroke-width="1"/>
+        <line x1="236" y1="93" x2="248" y2="93" stroke="#1e3050" stroke-width="1"/>
+        <line x1="236" y1="97" x2="248" y2="97" stroke="#1e3050" stroke-width="1"/>
+        <line x1="242" y1="72"  x2="240" y2="52" stroke="#e8a020" stroke-width="2" stroke-linecap="round" opacity=".8"/>
+        <circle cx="242" cy="108" r="4" fill="#e8a020" opacity=".7"/>
+        <circle cx="246" cy="78" r="2" fill="#00ff80" opacity=".8"/>
+        <!-- BELT -->
+        <rect x="94" y="230" width="112" height="12" rx="5" fill="#0d1820" stroke="#1e3050" stroke-width="1"/>
+        <rect x="138" y="231" width="24" height="10" rx="3" fill="#e8a020" opacity=".65"/>
+        <!-- Holster -->
+        <rect x="198" y="236" width="18" height="30" rx="5" fill="#080e14" stroke="#1e3050" stroke-width="1"/>
+        <!-- NECK -->
+        <rect x="135" y="118" width="30" height="26" rx="8" fill="#c09a70"/>
+        <!-- Collar -->
+        <path d="M129,132 L140,145 L150,132Z" fill="#eef2f8" opacity=".9"/>
+        <path d="M171,132 L160,145 L150,132Z" fill="#eef2f8" opacity=".9"/>
+        <!-- HEAD -->
+        <ellipse cx="150" cy="88" rx="40" ry="45" fill="#c09a70"/>
+        <ellipse cx="122" cy="90" rx="9" ry="11" fill="#b88a62"/>
+        <ellipse cx="178" cy="90" rx="9" ry="11" fill="#b88a62"/>
+        <!-- Cheekbones -->
+        <ellipse cx="124" cy="92" rx="9" ry="11" fill="#a07850" opacity=".3"/>
+        <ellipse cx="176" cy="92" rx="9" ry="11" fill="#a07850" opacity=".3"/>
+        <!-- Earpiece -->
+        <circle cx="179" cy="87" r="5" fill="#1a2a3a" stroke="#e8a020" stroke-width="1"/>
+        <circle cx="179" cy="87" r="2" fill="#e8a020" opacity=".6"/>
+        <path d="M179,92 Q183,108 178,122 Q175,132 173,140" fill="none" stroke="#e8a020" stroke-width="1.5" stroke-dasharray="3,3" opacity=".6"/>
+        <!-- POLICE CAP -->
+        <ellipse cx="150" cy="50" rx="44" ry="13" fill="#0f1f30"/>
+        <rect x="106" y="43" width="88" height="21" rx="5" fill="#0f1f30"/>
+        <ellipse cx="150" cy="38" rx="36" ry="18" fill="#132236"/>
+        <ellipse cx="150" cy="32" rx="32" ry="15" fill="#162840"/>
+        <rect x="108" y="53" width="84" height="9" rx="3" fill="#091520"/>
+        <rect x="108" y="56" width="84" height="4" rx="1" fill="#e8a020" opacity=".7"/>
+        <!-- Cap badge -->
+        <path d="M150,44 L142,48 L142,56 C142,62 146,66 150,68 C154,66 158,62 158,56 L158,48 Z" fill="#e8a020" opacity=".2" stroke="#e8a020" stroke-width="1.5"/>
+        <path d="M147,54 L149.5,57 L155,52" stroke="#e8a020" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <!-- Brim -->
+        <path d="M100,62 Q150,72 200,62" fill="#091520" stroke="#0a1520" stroke-width="1"/>
+        <path d="M102,64 Q150,75 198,64" fill="#060d16" stroke="#060d16" stroke-width="2"/>
+        <!-- FACE -->
+        <ellipse cx="134" cy="86" rx="9" ry="7" fill="white"/>
+        <ellipse cx="166" cy="86" rx="9" ry="7" fill="white"/>
+        <circle cx="135" cy="86" r="5" fill="#3a2810"/>
+        <circle cx="167" cy="86" r="5" fill="#3a2810"/>
+        <circle cx="134" cy="86" r="2.5" fill="#0d0d0d"/>
+        <circle cx="166" cy="86" r="2.5" fill="#0d0d0d"/>
+        <circle cx="136" cy="84" r="1.5" fill="white" opacity=".9"/>
+        <circle cx="168" cy="84" r="1.5" fill="white" opacity=".9"/>
+        <path d="M125,78 Q134,73 143,76" stroke="#3a2010" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+        <path d="M157,76 Q166,73 175,78" stroke="#3a2010" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+        <path d="M143,98 Q156,100" fill="#7a5030" opacity=".4"/>
+        <path d="M140,110 Q150,114 160,110" fill="none" stroke="#8a6040" stroke-width="1.6" stroke-linecap="round"/>
+        <path d="M145,100 Q148,103 151,100 Q154,103 157,100" fill="#b88a62" opacity=".5"/>
+        <!-- Subtle text block behind guard — left panel tagline -->
+        <rect x="4" y="118" width="60" height="4" rx="2" fill="#e8a020" opacity=".3"/>
+        <rect x="4" y="126" width="50" height="3" rx="2" fill="#e8a020" opacity=".18"/>
+        <rect x="4" y="110" width="3" height="22" rx="1.5" fill="#e8a020" opacity=".7"/>
+      </svg>
+    </div>
 
-    <!-- GROUND SPOTLIGHT UNDER GUARD -->
-    <ellipse cx="270" cy="475" rx="110" ry="30" fill="url(#spot)"/>
+    <!-- ── RIGHT: Patrol Car ── -->
+    <div class="sb-right">
+      <svg class="sb-car-svg" viewBox="0 0 560 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Car shadow -->
+        <ellipse cx="280" cy="290" rx="230" ry="14" fill="#000" opacity=".55"/>
+        <!-- HEADLIGHT CONE -->
+        <polygon points="30,210 0,200 0,240 30,235" fill="rgba(245,192,96,.18)"/>
+        <!-- REAR GLOW -->
+        <ellipse cx="535" cy="220" rx="40" ry="22" fill="#e03030" opacity=".1"/>
 
-    <!-- ═══ PATROL CAR ═══ -->
-    <!-- Car shadow on road -->
-    <ellipse cx="830" cy="477" rx="235" ry="14" fill="#000" opacity="0.55"/>
+        <!-- BODY LOWER -->
+        <rect x="30" y="190" width="500" height="78" rx="14" fill="#182a3c"/>
+        <!-- BODY UPPER / CABIN -->
+        <path d="M118,190 C132,142 172,120 212,114 L368,114 C404,120 436,142 450,190Z" fill="#132238" stroke="#1e3a55" stroke-width="1.5"/>
+        <!-- Roofline highlight -->
+        <path d="M132,190 C146,152 178,134 214,128 L366,128 C396,134 422,152 436,190" fill="none" stroke="#2a4a6a" stroke-width="1"/>
 
-    <!-- ── Body lower ── -->
-    <rect x="490" y="370" width="680" height="90" rx="16" fill="#182a3c"/>
-    <!-- Body upper / cabin -->
-    <path d="M590,370 C608,305 660,280 710,272 L960,272 C1008,280 1052,305 1070,370Z" fill="#132238" stroke="#1e3a55" stroke-width="1.5"/>
-    <!-- Roofline highlight -->
-    <path d="M610,370 C628,318 668,296 714,289 L954,289 C992,296 1030,318 1050,370" fill="none" stroke="#2a4a6a" stroke-width="1"/>
+        <!-- WINDSHIELD -->
+        <path d="M148,190 C160,156 188,140 214,134 L366,134 C388,140 412,156 424,190Z" fill="#0e2030" stroke="#1e3550" stroke-width="1"/>
+        <!-- Glare -->
+        <line x1="200" y1="190" x2="216" y2="140" stroke="#c8e0ff" stroke-width=".5" opacity=".15"/>
+        <line x1="380" y1="190" x2="364" y2="138" stroke="#c8e0ff" stroke-width=".5" opacity=".12"/>
 
-    <!-- ── Windshield ── -->
-    <path d="M622,370 C638,326 672,308 712,302 L954,302 C990,308 1022,326 1040,370Z" fill="#0e2030" stroke="#1e3550" stroke-width="1"/>
-    <!-- Windshield glare lines -->
-    <line x1="680" y1="370" x2="700" y2="308" stroke="#c8e0ff" stroke-width="0.5" opacity="0.18"/>
-    <line x1="700" y1="370" x2="720" y2="305" stroke="#c8e0ff" stroke-width="0.5" opacity="0.12"/>
-    <line x1="980" y1="370" x2="960" y2="307" stroke="#c8e0ff" stroke-width="0.5" opacity="0.15"/>
+        <!-- SIDE WINDOWS -->
+        <rect x="140" y="146" width="74" height="42" rx="6" fill="#0a1825" stroke="#1e3555" stroke-width="1"/>
+        <rect x="370" y="146" width="74" height="42" rx="6" fill="#0a1825" stroke="#1e3555" stroke-width="1"/>
+        <!-- B-pillars -->
+        <rect x="218" y="134" width="9" height="58" rx="2" fill="#162336"/>
+        <rect x="363" y="134" width="9" height="58" rx="2" fill="#162336"/>
 
-    <!-- ── Side windows ── -->
-    <!-- Left rear window -->
-    <rect x="610" y="314" width="80" height="52" rx="6" fill="#0a1825" stroke="#1e3555" stroke-width="1"/>
-    <!-- Right rear window -->
-    <rect x="972" y="314" width="80" height="52" rx="6" fill="#0a1825" stroke="#1e3555" stroke-width="1"/>
-    <!-- B-pillar -->
-    <rect x="695" y="300" width="10" height="72" rx="2" fill="#162336"/>
-    <rect x="957" y="300" width="10" height="72" rx="2" fill="#162336"/>
+        <!-- GOLD ACCENT STRIPE -->
+        <rect x="30" y="228" width="500" height="3" fill="#e8a020" opacity=".9"/>
+        <rect x="34" y="255" width="492" height="2" fill="#e8a020" opacity=".3"/>
 
-    <!-- ── Gold accent stripe along body ── -->
-    <rect x="490" y="406" width="680" height="3" fill="#e8a020" opacity="0.9"/>
-    <!-- Lower body accent line -->
-    <rect x="495" y="445" width="670" height="2" fill="#e8a020" opacity="0.35"/>
+        <!-- DOOR BRANDING -->
+        <path d="M262,210 L254,215 L254,228 C254,236 258,242 262,244 C266,242 270,236 270,228 L270,215 Z" fill="#e8a020" opacity=".15" stroke="#e8a020" stroke-width="1.2"/>
+        <path d="M259,224 L261.5,227 L267,222" stroke="#e8a020" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <text x="278" y="222" fill="#e8a020" font-family="Inter,sans-serif" font-weight="800" font-size="18" letter-spacing="2">GLD SECURITY</text>
+        <text x="278" y="238" fill="#e8a020" font-family="Inter,sans-serif" font-weight="400" font-size="9" letter-spacing="3" opacity=".7">LUXEMBOURG</text>
 
-    <!-- ── GLD SECURITY door branding ── -->
-    <!-- Logo shield on door -->
-    <path d="M750,385 L740,390 L740,400 C740,408 745,414 750,416 C755,414 760,408 760,400 L760,390 Z" fill="#e8a020" opacity="0.15" stroke="#e8a020" stroke-width="1.2"/>
-    <path d="M747,398 L749.5,401 L755,396" stroke="#e8a020" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-    <!-- GLD SECURITY text -->
-    <text x="770" y="396" fill="#e8a020" font-family="Inter,sans-serif" font-weight="800" font-size="22" letter-spacing="2">GLD SECURITY</text>
-    <text x="770" y="414" fill="#e8a020" font-family="Inter,sans-serif" font-weight="400" font-size="12" letter-spacing="4" opacity="0.7">LUXEMBOURG</text>
+        <!-- LIGHT BAR -->
+        <rect x="204" y="110" width="220" height="14" rx="5" fill="#0d1b2a" stroke="#1e3a55" stroke-width="1"/>
+        <rect x="208" y="113" width="26" height="8" rx="2" fill="#e8a020" opacity=".85"/>
+        <rect x="238" y="113" width="26" height="8" rx="2" fill="#2050d0" opacity=".75"/>
+        <rect x="268" y="113" width="26" height="8" rx="2" fill="#e8a020" opacity=".7"/>
+        <rect x="298" y="113" width="26" height="8" rx="2" fill="#2050d0" opacity=".75"/>
+        <rect x="328" y="113" width="26" height="8" rx="2" fill="#e8a020" opacity=".7"/>
+        <rect x="358" y="113" width="26" height="8" rx="2" fill="#c0392b" opacity=".8"/>
+        <rect x="388" y="113" width="26" height="8" rx="2" fill="#e8a020" opacity=".75"/>
 
-    <!-- ── Light bar on roof ── -->
-    <rect x="680" y="268" width="300" height="18" rx="6" fill="#0d1b2a" stroke="#1e3a55" stroke-width="1"/>
-    <!-- Individual lights: amber-blue-amber pattern -->
-    <rect x="686" y="271" width="36" height="12" rx="3" fill="#e8a020" opacity="0.85"/>
-    <rect x="727" y="271" width="36" height="12" rx="3" fill="#2050d0" opacity="0.75"/>
-    <rect x="768" y="271" width="36" height="12" rx="3" fill="#e8a020" opacity="0.7"/>
-    <rect x="809" y="271" width="36" height="12" rx="3" fill="#2050d0" opacity="0.75"/>
-    <rect x="850" y="271" width="36" height="12" rx="3" fill="#e8a020" opacity="0.7"/>
-    <rect x="891" y="271" width="36" height="12" rx="3" fill="#c0392b" opacity="0.8"/>
-    <rect x="932" y="271" width="36" height="12" rx="3" fill="#e8a020" opacity="0.75"/>
+        <!-- FRONT HEADLIGHTS -->
+        <rect x="30" y="204" width="38" height="18" rx="4" fill="#182a3c" stroke="#2a4a6a" stroke-width="1"/>
+        <rect x="34" y="216" width="30" height="4" rx="2" fill="#f5c060" opacity=".9"/>
+        <ellipse cx="49" cy="210" rx="13" ry="8" fill="#1a3050" stroke="#f5c060" stroke-width="1"/>
+        <ellipse cx="49" cy="210" rx="7" ry="5" fill="#f5e080" opacity=".8"/>
+        <circle cx="49" cy="210" r="3" fill="white" opacity=".9"/>
 
-    <!-- ── Front headlights ── -->
-    <rect x="490" y="382" width="44" height="22" rx="5" fill="#182a3c" stroke="#2a4a6a" stroke-width="1"/>
-    <!-- DRL bar -->
-    <rect x="494" y="395" width="36" height="5" rx="2" fill="#f5c060" opacity="0.9"/>
-    <!-- Headlight lens -->
-    <ellipse cx="512" cy="388" rx="16" ry="10" fill="#1a3050" stroke="#f5c060" stroke-width="1.2"/>
-    <ellipse cx="512" cy="388" rx="9" ry="6" fill="#f5e080" opacity="0.8"/>
-    <circle cx="512" cy="388" r="4" fill="white" opacity="0.9"/>
+        <!-- REAR LIGHTS -->
+        <rect x="492" y="202" width="38" height="22" rx="4" fill="#1a1020" stroke="#5a1010" stroke-width="1"/>
+        <ellipse cx="511" cy="213" rx="13" ry="8" fill="#c0392b" opacity=".7" stroke="#e03030" stroke-width="1"/>
+        <ellipse cx="511" cy="213" rx="6" ry="4" fill="#ff4040" opacity=".8"/>
+        <rect x="494" y="218" width="32" height="4" rx="2" fill="#c0392b" opacity=".6"/>
 
-    <!-- ── Rear lights ── -->
-    <rect x="1126" y="380" width="44" height="28" rx="5" fill="#1a1020" stroke="#5a1010" stroke-width="1"/>
-    <ellipse cx="1148" cy="394" rx="16" ry="10" fill="#c0392b" opacity="0.7" stroke="#e03030" stroke-width="1"/>
-    <ellipse cx="1148" cy="394" rx="8" ry="5" fill="#ff4040" opacity="0.8"/>
-    <!-- Rear fog light -->
-    <rect x="1128" y="400" width="38" height="5" rx="2" fill="#c0392b" opacity="0.6"/>
+        <!-- FRONT BUMPER -->
+        <rect x="28" y="255" width="90" height="16" rx="6" fill="#0d1b2a" stroke="#1e3050" stroke-width="1"/>
+        <rect x="52" y="257" width="42" height="12" rx="2" fill="#f0f0e0"/>
+        <text x="73" y="267" text-anchor="middle" fill="#222" font-family="Inter,sans-serif" font-weight="700" font-size="7">LU·GLD1</text>
+        <!-- Grille -->
+        <line x1="34" y1="259" x2="48" y2="259" stroke="#1a3050" stroke-width="1.5" opacity=".8"/>
+        <line x1="34" y1="263" x2="48" y2="263" stroke="#1a3050" stroke-width="1.5" opacity=".5"/>
 
-    <!-- ── Front bumper ── -->
-    <rect x="488" y="445" width="100" height="18" rx="7" fill="#0d1b2a" stroke="#1e3050" stroke-width="1"/>
-    <!-- License plate front -->
-    <rect x="536" y="447" width="48" height="14" rx="2" fill="#f0f0e0"/>
-    <text x="560" y="458" text-anchor="middle" fill="#222" font-family="Inter,sans-serif" font-weight="700" font-size="8">LU·GLD1</text>
-    <!-- Grille texture -->
-    <line x1="495" y1="449" x2="532" y2="449" stroke="#1a3050" stroke-width="1.5" opacity="0.8"/>
-    <line x1="495" y1="454" x2="532" y2="454" stroke="#1a3050" stroke-width="1.5" opacity="0.5"/>
-    <line x1="495" y1="459" x2="532" y2="459" stroke="#1a3050" stroke-width="1" opacity="0.3"/>
+        <!-- REAR BUMPER -->
+        <rect x="442" y="255" width="90" height="16" rx="6" fill="#0d1b2a" stroke="#1e3050" stroke-width="1"/>
+        <rect x="466" y="257" width="42" height="12" rx="2" fill="#f0f0e0"/>
+        <text x="487" y="267" text-anchor="middle" fill="#222" font-family="Inter,sans-serif" font-weight="700" font-size="7">LU·GLD1</text>
 
-    <!-- ── Rear bumper ── -->
-    <rect x="1072" y="445" width="100" height="18" rx="7" fill="#0d1b2a" stroke="#1e3050" stroke-width="1"/>
-    <rect x="1100" y="447" width="48" height="14" rx="2" fill="#f0f0e0"/>
-    <text x="1124" y="458" text-anchor="middle" fill="#222" font-family="Inter,sans-serif" font-weight="700" font-size="8">LU·GLD1</text>
+        <!-- FRONT WHEELS -->
+        <circle cx="148" cy="273" r="38" fill="#080e14" stroke="#1e3050" stroke-width="2"/>
+        <circle cx="148" cy="273" r="25" fill="#101820" stroke="#e8a020" stroke-width="1.5"/>
+        <circle cx="148" cy="273" r="9"  fill="#080e14" stroke="#e8a020" stroke-width="1.5"/>
+        <line x1="148" y1="248" x2="148" y2="298" stroke="#e8a020" stroke-width="1.8" opacity=".5"/>
+        <line x1="123" y1="273" x2="173" y2="273" stroke="#e8a020" stroke-width="1.8" opacity=".5"/>
+        <line x1="130" y1="252" x2="166" y2="294" stroke="#e8a020" stroke-width="1.3" opacity=".3"/>
+        <line x1="166" y1="252" x2="130" y2="294" stroke="#e8a020" stroke-width="1.3" opacity=".3"/>
+        <circle cx="148" cy="273" r="6" fill="#e8a020" opacity=".25"/>
 
-    <!-- ── Front wheels ── -->
-    <circle cx="630" cy="467" r="44" fill="#080e14" stroke="#1e3050" stroke-width="2"/>
-    <circle cx="630" cy="467" r="30" fill="#101820" stroke="#e8a020" stroke-width="1.5"/>
-    <circle cx="630" cy="467" r="11" fill="#080e14" stroke="#e8a020" stroke-width="1.5"/>
-    <!-- 5 spokes front -->
-    <line x1="630" y1="437" x2="630" y2="497" stroke="#e8a020" stroke-width="2" opacity="0.5"/>
-    <line x1="600" y1="467" x2="660" y2="467" stroke="#e8a020" stroke-width="2" opacity="0.5"/>
-    <line x1="609" y1="441" x2="651" y2="493" stroke="#e8a020" stroke-width="1.5" opacity="0.3"/>
-    <line x1="651" y1="441" x2="609" y2="493" stroke="#e8a020" stroke-width="1.5" opacity="0.3"/>
-    <!-- Wheel hub caps -->
-    <circle cx="630" cy="467" r="8" fill="#e8a020" opacity="0.25"/>
+        <!-- REAR WHEELS -->
+        <circle cx="412" cy="273" r="38" fill="#080e14" stroke="#1e3050" stroke-width="2"/>
+        <circle cx="412" cy="273" r="25" fill="#101820" stroke="#e8a020" stroke-width="1.5"/>
+        <circle cx="412" cy="273" r="9"  fill="#080e14" stroke="#e8a020" stroke-width="1.5"/>
+        <line x1="412" y1="248" x2="412" y2="298" stroke="#e8a020" stroke-width="1.8" opacity=".5"/>
+        <line x1="387" y1="273" x2="437" y2="273" stroke="#e8a020" stroke-width="1.8" opacity=".5"/>
+        <line x1="394" y1="252" x2="430" y2="294" stroke="#e8a020" stroke-width="1.3" opacity=".3"/>
+        <line x1="430" y1="252" x2="394" y2="294" stroke="#e8a020" stroke-width="1.3" opacity=".3"/>
+        <circle cx="412" cy="273" r="6" fill="#e8a020" opacity=".25"/>
 
-    <!-- ── Rear wheels ── -->
-    <circle cx="1032" cy="467" r="44" fill="#080e14" stroke="#1e3050" stroke-width="2"/>
-    <circle cx="1032" cy="467" r="30" fill="#101820" stroke="#e8a020" stroke-width="1.5"/>
-    <circle cx="1032" cy="467" r="11" fill="#080e14" stroke="#e8a020" stroke-width="1.5"/>
-    <line x1="1032" y1="437" x2="1032" y2="497" stroke="#e8a020" stroke-width="2" opacity="0.5"/>
-    <line x1="1002" y1="467" x2="1062" y2="467" stroke="#e8a020" stroke-width="2" opacity="0.5"/>
-    <line x1="1011" y1="441" x2="1053" y2="493" stroke="#e8a020" stroke-width="1.5" opacity="0.3"/>
-    <line x1="1053" y1="441" x2="1011" y2="493" stroke="#e8a020" stroke-width="1.5" opacity="0.3"/>
-    <circle cx="1032" cy="467" r="8" fill="#e8a020" opacity="0.25"/>
+        <!-- ANTENNA -->
+        <line x1="428" y1="110" x2="428" y2="84" stroke="#e8a020" stroke-width="2" stroke-linecap="round" opacity=".7"/>
+        <circle cx="428" cy="82" r="3" fill="#e8a020" opacity=".8"/>
 
-    <!-- ── Antenna ── -->
-    <line x1="1050" y1="268" x2="1050" y2="238" stroke="#e8a020" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
-    <circle cx="1050" cy="236" r="3.5" fill="#e8a020" opacity="0.8"/>
+        <!-- DOOR HANDLES -->
+        <rect x="282" y="240" width="30" height="7" rx="3.5" fill="#1e3a55" stroke="#2a5070" stroke-width="1"/>
+        <rect x="354" y="240" width="30" height="7" rx="3.5" fill="#1e3a55" stroke="#2a5070" stroke-width="1"/>
+      </svg>
+    </div>
 
-    <!-- ── Door handle ── -->
-    <rect x="780" y="428" width="35" height="8" rx="4" fill="#1e3a55" stroke="#2a5070" stroke-width="1"/>
-    <rect x="875" y="428" width="35" height="8" rx="4" fill="#1e3a55" stroke="#2a5070" stroke-width="1"/>
+    <!-- Centre divider line -->
+    <div class="sb-divider"></div>
 
-    <!-- ── Roof rack / small equipment box ── -->
-    <rect x="660" y="263" width="36" height="8" rx="3" fill="#0d1b2a" stroke="#1e3050" stroke-width="1"/>
-    <rect x="964" y="263" width="36" height="8" rx="3" fill="#0d1b2a" stroke="#1e3050" stroke-width="1"/>
+    <!-- ── Tagline overlay ── -->
+    <div class="sb-tagline-wrap">
+      <div class="sb-tagline">
+        <span class="sb-tagline-label">On the Ground</span>
+        <h3 class="sb-tagline-headline">Deployed &amp; <em>Ready</em>, 24/7</h3>
+        <span class="sb-tagline-sub">Professional security across Luxembourg since 2011</span>
+      </div>
+    </div>
 
-    <!-- ═══ SECURITY GUARD ═══ -->
-    <!-- Shadow on ground -->
-    <ellipse cx="270" cy="476" rx="65" ry="10" fill="#000" opacity="0.5"/>
+  </div><!-- /sb-scene -->
 
-    <!-- ── BOOTS ── -->
-    <rect x="234" y="440" width="34" height="30" rx="7" fill="#0a1018"/>
-    <rect x="275" y="440" width="34" height="30" rx="7" fill="#0a1018"/>
-    <!-- Boot toe -->
-    <ellipse cx="251" cy="469" rx="17" ry="8" fill="#080e14"/>
-    <ellipse cx="292" cy="469" rx="17" ry="8" fill="#080e14"/>
+  <!-- Animated road strip at base -->
+  <div class="sb-road">
+    <div class="sb-road-strip">
+      <div class="sb-road-dash"></div>
+    </div>
+  </div>
 
-    <!-- ── LEGS (trousers) ── -->
-    <rect x="238" y="330" width="30" height="118" rx="8" fill="#162236"/>
-    <rect x="279" y="330" width="30" height="118" rx="8" fill="#1a2840"/>
-    <!-- Trouser crease -->
-    <line x1="253" y1="335" x2="253" y2="445" stroke="#1e3050" stroke-width="1" opacity="0.6"/>
-    <line x1="294" y1="335" x2="294" y2="445" stroke="#1e3050" stroke-width="1" opacity="0.6"/>
+</div><!-- /security-banner -->
 
-    <!-- ── TORSO (jacket) ── -->
-    <rect x="214" y="218" width="118" height="122" rx="14" fill="#1a2e44"/>
-    <!-- Jacket lapels -->
-    <path d="M260,218 L248,255 L265,248Z" fill="#132236"/>
-    <path d="M286,218 L298,255 L281,248Z" fill="#132236"/>
-    <!-- Shirt/tie visible -->
-    <rect x="265" y="220" width="16" height="40" rx="3" fill="#eef2f8" opacity="0.9"/>
-    <rect x="270" y="222" width="6" height="36" rx="2" fill="#0d1b2a" opacity="0.85"/>
-
-    <!-- ── TACTICAL VEST over jacket ── -->
-    <rect x="222" y="225" width="102" height="108" rx="10" fill="#112030" stroke="#1e3a55" stroke-width="1.5"/>
-    <!-- Vest chest pockets -->
-    <rect x="230" y="235" width="36" height="28" rx="5" fill="#0e1e2e" stroke="#e8a020" stroke-width="1" opacity="0.9"/>
-    <rect x="280" y="235" width="36" height="28" rx="5" fill="#0e1e2e" stroke="#e8a020" stroke-width="1" opacity="0.9"/>
-    <!-- Pocket buckle detail -->
-    <rect x="244" y="253" width="8" height="5" rx="1" fill="#e8a020" opacity="0.5"/>
-    <rect x="294" y="253" width="8" height="5" rx="1" fill="#e8a020" opacity="0.5"/>
-    <!-- Zipper pull on vest -->
-    <line x1="273" y1="225" x2="273" y2="330" stroke="#1e3a55" stroke-width="2"/>
-    <!-- GLD ID badge on chest -->
-    <rect x="236" y="268" width="76" height="50" rx="6" fill="#0d1b2a" stroke="#e8a020" stroke-width="1.5"/>
-    <rect x="240" y="272" width="68" height="30" rx="3" fill="#e8a020" opacity="0.12"/>
-    <text x="274" y="288" text-anchor="middle" fill="#e8a020" font-family="Inter,sans-serif" font-weight="800" font-size="14">GLD</text>
-    <text x="274" y="301" text-anchor="middle" fill="#e8a020" font-family="Inter,sans-serif" font-size="8" letter-spacing="1" opacity="0.8">SECURITY</text>
-    <!-- Badge photo area -->
-    <rect x="241" y="305" width="18" height="10" rx="2" fill="#c8a882" opacity="0.6"/>
-    <rect x="264" y="307" width="36" height="4" rx="1" fill="#1e3050" opacity="0.8"/>
-    <rect x="264" y="313" width="26" height="3" rx="1" fill="#1e3050" opacity="0.5"/>
-
-    <!-- ── EPAULETTES ── -->
-    <rect x="212" y="220" width="24" height="14" rx="4" fill="#e8a020" opacity="0.75"/>
-    <rect x="310" y="220" width="24" height="14" rx="4" fill="#e8a020" opacity="0.75"/>
-    <!-- Rank pips on epaulette -->
-    <circle cx="218" cy="226" r="2" fill="#fff" opacity="0.9"/>
-    <circle cx="226" cy="226" r="2" fill="#fff" opacity="0.9"/>
-    <circle cx="316" cy="226" r="2" fill="#fff" opacity="0.9"/>
-    <circle cx="324" cy="226" r="2" fill="#fff" opacity="0.9"/>
-
-    <!-- ── LEFT ARM (relaxed at side) ── -->
-    <rect x="188" y="222" width="30" height="100" rx="12" fill="#1a2e44"/>
-    <!-- Left glove / hand -->
-    <ellipse cx="203" cy="328" rx="15" ry="12" fill="#0e1820"/>
-    <!-- Fingers hint -->
-    <path d="M193 324 Q196 334 203 336 Q210 334 213 324" fill="#0a1218" stroke="#162230" stroke-width="1"/>
-
-    <!-- ── RIGHT ARM (raised, holding radio) ── -->
-    <rect x="328" y="218" width="30" height="85" rx="12" fill="#1a2e44"/>
-    <!-- Forearm angled up -->
-    <rect x="332" y="185" width="26" height="45" rx="10" fill="#1e3248" transform="rotate(-18,345,210)"/>
-    <!-- Right glove -->
-    <ellipse cx="355" cy="200" rx="14" ry="11" fill="#0e1820" transform="rotate(-18,355,200)"/>
-    <!-- RADIO (handheld) -->
-    <rect x="358" y="150" width="24" height="50" rx="6" fill="#0d1b2a" stroke="#e8a020" stroke-width="1.5"/>
-    <rect x="362" y="155" width="16" height="6" rx="2" fill="#e8a020" opacity="0.4"/>
-    <!-- Radio speaker grille -->
-    <rect x="362" y="165" width="16" height="12" rx="2" fill="#091520" stroke="#1e3050" stroke-width="0.5"/>
-    <line x1="364" y1="167" x2="376" y2="167" stroke="#1e3050" stroke-width="1"/>
-    <line x1="364" y1="170" x2="376" y2="170" stroke="#1e3050" stroke-width="1"/>
-    <line x1="364" y1="173" x2="376" y2="173" stroke="#1e3050" stroke-width="1"/>
-    <!-- Radio antenna -->
-    <line x1="370" y1="150" x2="368" y2="130" stroke="#e8a020" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
-    <!-- Radio button -->
-    <circle cx="370" cy="183" r="4" fill="#e8a020" opacity="0.7"/>
-    <!-- Radio status LED -->
-    <circle cx="374" cy="158" r="2" fill="#00ff80" opacity="0.8"/>
-
-    <!-- ── NECK ── -->
-    <rect x="258" y="196" width="30" height="30" rx="8" fill="#c09a70"/>
-    <!-- Shirt collar -->
-    <path d="M252,212 L263,225 L273,212Z" fill="#eef2f8" opacity="0.9"/>
-    <path d="M294,212 L283,225 L273,212Z" fill="#eef2f8" opacity="0.9"/>
-
-    <!-- ── HEAD ── -->
-    <!-- Head shape -->
-    <ellipse cx="273" cy="165" rx="42" ry="48" fill="#c09a70"/>
-    <!-- Cheekbone shadows -->
-    <ellipse cx="242" cy="168" rx="10" ry="12" fill="#a07850" opacity="0.35"/>
-    <ellipse cx="304" cy="168" rx="10" ry="12" fill="#a07850" opacity="0.35"/>
-    <!-- Ears -->
-    <ellipse cx="231" cy="166" rx="9" ry="12" fill="#b88a62"/>
-    <ellipse cx="315" cy="166" rx="9" ry="12" fill="#b88a62"/>
-    <!-- Ear canal -->
-    <ellipse cx="232" cy="166" rx="4" ry="6" fill="#a07850" opacity="0.5"/>
-    <!-- Earpiece (comms) -->
-    <circle cx="316" cy="163" r="5" fill="#1a2a3a" stroke="#e8a020" stroke-width="1"/>
-    <circle cx="316" cy="163" r="2" fill="#e8a020" opacity="0.6"/>
-    <!-- Earpiece wire down to collar -->
-    <path d="M316,168 Q320,185 315,200 Q312,210 310,222" fill="none" stroke="#e8a020" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.6"/>
-
-    <!-- ── POLICE CAP ── -->
-    <!-- Cap top -->
-    <ellipse cx="273" cy="127" rx="45" ry="14" fill="#0f1f30"/>
-    <rect x="228" y="120" width="90" height="22" rx="6" fill="#0f1f30"/>
-    <!-- Cap crown (raised) -->
-    <ellipse cx="273" cy="116" rx="38" ry="20" fill="#132236"/>
-    <ellipse cx="273" cy="110" rx="34" ry="16" fill="#162840"/>
-    <!-- Cap band -->
-    <rect x="230" y="130" width="86" height="10" rx="3" fill="#091520"/>
-    <!-- Gold band on cap -->
-    <rect x="230" y="133" width="86" height="4" rx="1" fill="#e8a020" opacity="0.7"/>
-    <!-- GLD cap badge (shield shape) -->
-    <path d="M273,119 L265,123 L265,131 C265,137 269,141 273,143 C277,141 281,137 281,131 L281,123 Z" fill="#e8a020" opacity="0.25" stroke="#e8a020" stroke-width="1.5"/>
-    <path d="M270,129 L272.5,132 L278,127" stroke="#e8a020" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-    <!-- Cap brim -->
-    <path d="M222,138 Q273,148 324,138" fill="#091520" stroke="#0a1520" stroke-width="1"/>
-    <path d="M224,140 Q273,152 322,140" fill="#060d16" stroke="#060d16" stroke-width="2"/>
-    <!-- Brim sheen -->
-    <path d="M234,138 Q260,144 290,138" fill="none" stroke="#1e3a55" stroke-width="1" opacity="0.5"/>
-
-    <!-- ── FACE DETAILS ── -->
-    <!-- Jawline / chin shadow -->
-    <path d="M238,185 Q273,200 308,185" fill="#a07850" opacity="0.25"/>
-    <!-- Mustache subtle -->
-    <path d="M260,185 Q273,189 286,185" fill="#7a5030" opacity="0.45" stroke="none"/>
-    <!-- Nose -->
-    <path d="M268,174 Q265,180 268,183 Q273,185 278,183 Q281,180 278,174" fill="#b08860" opacity="0.6"/>
-    <!-- Eyes white -->
-    <ellipse cx="254" cy="162" rx="10" ry="7" fill="white"/>
-    <ellipse cx="292" cy="162" rx="10" ry="7" fill="white"/>
-    <!-- Iris -->
-    <circle cx="255" cy="162" r="5.5" fill="#3a2810"/>
-    <circle cx="293" cy="162" r="5.5" fill="#3a2810"/>
-    <!-- Pupil -->
-    <circle cx="255" cy="162" r="3" fill="#0d0d0d"/>
-    <circle cx="293" cy="162" r="3" fill="#0d0d0d"/>
-    <!-- Eye shine -->
-    <circle cx="257" cy="160" r="1.5" fill="white" opacity="0.9"/>
-    <circle cx="295" cy="160" r="1.5" fill="white" opacity="0.9"/>
-    <!-- Eyebrows (firm, authoritative) -->
-    <path d="M244,153 Q254,148 264,152" stroke="#3a2010" stroke-width="3" stroke-linecap="round" fill="none"/>
-    <path d="M282,152 Q292,148 302,153" stroke="#3a2010" stroke-width="3" stroke-linecap="round" fill="none"/>
-    <!-- Mouth (professional, neutral) -->
-    <path d="M260,190 Q273,194 286,190" fill="none" stroke="#8a6040" stroke-width="1.8" stroke-linecap="round"/>
-
-    <!-- ── BELT ── -->
-    <rect x="218" y="325" width="110" height="14" rx="5" fill="#0d1820" stroke="#1e3050" stroke-width="1"/>
-    <!-- Belt buckle -->
-    <rect x="262" y="326" width="22" height="12" rx="3" fill="#e8a020" opacity="0.65"/>
-    <rect x="267" y="329" width="12" height="6" rx="1" fill="#e8a020" opacity="0.4"/>
-    <!-- Holster -->
-    <rect x="316" y="330" width="20" height="35" rx="5" fill="#080e14" stroke="#1e3050" stroke-width="1"/>
-    <rect x="319" y="334" width="14" height="8" rx="2" fill="#162236"/>
-
-    <!-- ── BANNER TEXT OVERLAY ── -->
-    <!-- Dark gradient overlay for text readability -->
-    <rect x="0" y="0" width="500" height="520" fill="#06101a" opacity="0.45"/>
-
-    <!-- Tagline text area -->
-    <rect x="50" y="170" width="380" height="140" rx="12" fill="#06101a" opacity="0.55" stroke="#e8a020" stroke-width="1" stroke-opacity="0.3"/>
-    <!-- Corner accents on text box -->
-    <rect x="50" y="170" width="20" height="3" fill="#e8a020" opacity="0.8"/>
-    <rect x="50" y="170" width="3" height="20" fill="#e8a020" opacity="0.8"/>
-    <rect x="410" y="170" width="20" height="3" fill="#e8a020" opacity="0.8"/>
-    <rect x="427" y="170" width="3" height="20" fill="#e8a020" opacity="0.8"/>
-    <rect x="50" y="307" width="20" height="3" fill="#e8a020" opacity="0.8"/>
-    <rect x="50" y="290" width="3" height="20" fill="#e8a020" opacity="0.8"/>
-    <rect x="410" y="307" width="20" height="3" fill="#e8a020" opacity="0.8"/>
-    <rect x="427" y="290" width="3" height="20" fill="#e8a020" opacity="0.8"/>
-
-    <!-- Sub-label -->
-    <rect x="65" y="186" width="4" height="24" rx="2" fill="#e8a020"/>
-    <text x="80" y="204" fill="#e8a020" font-family="Inter,sans-serif" font-weight="700" font-size="13" letter-spacing="3">ON THE GROUND</text>
-    <!-- Main headline -->
-    <text x="65" y="245" fill="white" font-family="Inter,sans-serif" font-weight="800" font-size="36">Deployed</text>
-    <text x="65" y="285" fill="white" font-family="Inter,sans-serif" font-weight="800" font-size="36">&amp; <tspan fill="#e8a020">Ready</tspan>, 24/7</text>
-    <!-- Descriptor line -->
-    <text x="65" y="300" fill="white" font-family="Inter,sans-serif" font-size="12" opacity="0.55" letter-spacing="1">Professional security across Luxembourg since 2011</text>
-  </svg>
-</div>
 
 <!-- CTA BAND -->
 <div class="cta-band" id="contact">
@@ -1021,95 +1152,340 @@ footer{background:var(--navy);padding:64px 0 0}
     </div>
     <div class="team-grid">
 
-      <!-- Member 1 -->
+      <!-- ── Member 1: Jean-Marc Dupont / CEO ── Dark navy suit, white shirt, gold tie -->
       <div class="team-card reveal delay-1">
         <div class="team-photo">
-          <div class="team-photo-placeholder">
-            <div class="team-avatar-ring">
-              <div class="team-avatar-icon">
-                <svg viewBox="0 0 42 42" fill="none">
-                  <circle cx="21" cy="15" r="9" stroke-width="1.4"/>
-                  <path d="M5 40v-2a16 16 0 0 1 32 0v2" stroke-width="1.4"/>
-                </svg>
-              </div>
-            </div>
-            <span class="photo-upload-hint">📷 Replace with photo</span>
+          <div class="team-avatar-svg">
+            <svg viewBox="0 0 180 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Body shadow -->
+              <ellipse cx="90" cy="255" rx="55" ry="7" fill="#000" opacity=".3"/>
+              <!-- Legs -->
+              <rect x="58" y="185" width="28" height="72" rx="6" fill="#162030"/>
+              <rect x="94" y="185" width="28" height="72" rx="6" fill="#1a2840"/>
+              <!-- Shoes -->
+              <ellipse cx="72" cy="256" rx="18" ry="7" fill="#080e14"/>
+              <ellipse cx="108" cy="256" rx="18" ry="7" fill="#080e14"/>
+              <rect x="55" y="248" width="34" height="12" rx="5" fill="#0a1218"/>
+              <rect x="91" y="248" width="34" height="12" rx="5" fill="#0a1218"/>
+              <!-- JACKET body -->
+              <rect x="44" y="112" width="92" height="80" rx="12" fill="#162030"/>
+              <!-- Lapels -->
+              <path d="M82,112 L70,142 L88,136Z" fill="#0d1820"/>
+              <path d="M98,112 L110,142 L92,136Z" fill="#0d1820"/>
+              <!-- White shirt -->
+              <rect x="82" y="114" width="16" height="32" rx="2" fill="#eef2f8" opacity=".95"/>
+              <!-- Gold tie -->
+              <path d="M87,116 L85,130 L90,148 L95,130 L93,116Z" fill="#e8a020" opacity=".85"/>
+              <path d="M87,116 L93,116 L91,122 L89,122Z" fill="#e8a020"/>
+              <!-- Jacket buttons -->
+              <circle cx="90" cy="158" r="2" fill="#1e3050"/>
+              <circle cx="90" cy="168" r="2" fill="#1e3050"/>
+              <!-- Pocket square (gold) -->
+              <path d="M110,122 L122,122 L122,134 L114,130Z" fill="#162030"/>
+              <path d="M113,122 L120,120 L119,126 L115,125Z" fill="#e8a020" opacity=".7"/>
+              <!-- Left arm -->
+              <rect x="28" y="116" width="22" height="72" rx="10" fill="#162030"/>
+              <ellipse cx="39" cy="193" rx="12" ry="9" fill="#c09a70"/>
+              <!-- Right arm -->
+              <rect x="130" y="116" width="22" height="72" rx="10" fill="#162030"/>
+              <ellipse cx="141" cy="193" rx="12" ry="9" fill="#c09a70"/>
+              <!-- Belt -->
+              <rect x="58" y="186" width="64" height="8" rx="4" fill="#0a1018"/>
+              <rect x="83" y="187" width="14" height="6" rx="2" fill="#e8a020" opacity=".6"/>
+              <!-- NECK -->
+              <rect x="81" y="96" width="18" height="22" rx="7" fill="#c09a70"/>
+              <!-- Collar -->
+              <path d="M76,108 L86,120 L90,108Z" fill="#eef2f8" opacity=".9"/>
+              <path d="M104,108 L94,120 L90,108Z" fill="#eef2f8" opacity=".9"/>
+              <!-- HEAD -->
+              <ellipse cx="90" cy="66" rx="32" ry="36" fill="#c09a70"/>
+              <!-- Ears -->
+              <ellipse cx="58" cy="67" rx="7" ry="9" fill="#b88a62"/>
+              <ellipse cx="122" cy="67" rx="7" ry="9" fill="#b88a62"/>
+              <!-- Hair (dark, side-parted) -->
+              <path d="M62,42 Q90,28 118,42 L120,50 Q90,38 60,50Z" fill="#1a0e06"/>
+              <path d="M60,50 Q62,44 90,38 Q118,44 120,50 L118,54 Q90,42 62,54Z" fill="#1a0e06"/>
+              <!-- Face -->
+              <ellipse cx="76" cy="64" rx="8" ry="6" fill="white"/>
+              <ellipse cx="104" cy="64" rx="8" ry="6" fill="white"/>
+              <circle cx="77" cy="64" r="5" fill="#3a2010"/>
+              <circle cx="105" cy="64" r="5" fill="#3a2010"/>
+              <circle cx="76" cy="64" r="2.5" fill="#111"/>
+              <circle cx="104" cy="64" r="2.5" fill="#111"/>
+              <circle cx="78" cy="62" r="1.3" fill="white" opacity=".9"/>
+              <circle cx="106" cy="62" r="1.3" fill="white" opacity=".9"/>
+              <path d="M68,56 Q76,52 84,55" stroke="#1a0e06" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+              <path d="M96,55 Q104,52 112,56" stroke="#1a0e06" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+              <path d="M76,78 Q90,82 104,78" fill="none" stroke="#8a5a38" stroke-width="1.4" stroke-linecap="round"/>
+              <path d="M82,74 Q88,77 90,74 Q92,77 98,74" fill="#b88a62" opacity=".5"/>
+              <!-- Glasses (sophisticated executive) -->
+              <rect x="68" y="60" width="18" height="11" rx="4" fill="none" stroke="#0a1018" stroke-width="1.5" opacity=".7"/>
+              <rect x="94" y="60" width="18" height="11" rx="4" fill="none" stroke="#0a1018" stroke-width="1.5" opacity=".7"/>
+              <line x1="86" y1="65" x2="94" y2="65" stroke="#0a1018" stroke-width="1.5" opacity=".7"/>
+              <line x1="58" y1="65" x2="68" y2="65" stroke="#0a1018" stroke-width="1.2" opacity=".5"/>
+              <line x1="112" y1="65" x2="122" y2="65" stroke="#0a1018" stroke-width="1.2" opacity=".5"/>
+            </svg>
           </div>
         </div>
         <div class="team-info">
           <h3>Jean-Marc Dupont</h3>
           <span class="team-role">Chief Executive Officer</span>
           <p class="team-bio">Co-founder and driving force behind GLD Security. Over 20 years of experience in professional security and risk management across Europe.</p>
+          <div class="team-social">
+            <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a>
+          </div>
         </div>
       </div>
 
-      <!-- Member 2 -->
+      <!-- ── Member 2: Sophie Mertens / Operations Director ── Charcoal jacket, teal blouse -->
       <div class="team-card reveal delay-2">
         <div class="team-photo">
-          <div class="team-photo-placeholder">
-            <div class="team-avatar-ring">
-              <div class="team-avatar-icon">
-                <svg viewBox="0 0 42 42" fill="none">
-                  <circle cx="21" cy="15" r="9" stroke-width="1.4"/>
-                  <path d="M5 40v-2a16 16 0 0 1 32 0v2" stroke-width="1.4"/>
-                </svg>
-              </div>
-            </div>
-            <span class="photo-upload-hint">📷 Replace with photo</span>
+          <div class="team-avatar-svg">
+            <svg viewBox="0 0 180 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="90" cy="255" rx="52" ry="7" fill="#000" opacity=".3"/>
+              <!-- Legs / skirt -->
+              <rect x="60" y="190" width="60" height="66" rx="8" fill="#2a3a2a"/>
+              <!-- Shoes -->
+              <ellipse cx="72" cy="256" rx="16" ry="7" fill="#1a0e0e"/>
+              <ellipse cx="108" cy="256" rx="16" ry="7" fill="#1a0e0e"/>
+              <rect x="58" y="248" width="28" height="11" rx="5" fill="#1a1018"/>
+              <rect x="94" y="248" width="28" height="11" rx="5" fill="#1a1018"/>
+              <!-- JACKET -->
+              <rect x="46" y="114" width="88" height="82" rx="12" fill="#2a3a2a"/>
+              <path d="M80,114 L68,146 L86,140Z" fill="#1e2e1e"/>
+              <path d="M100,114 L112,146 L94,140Z" fill="#1e2e1e"/>
+              <!-- Teal blouse (visible between lapels) -->
+              <rect x="80" y="116" width="20" height="30" rx="2" fill="#1a6060" opacity=".9"/>
+              <!-- Necklace -->
+              <path d="M82,126 Q90,132 98,126" fill="none" stroke="#e8a020" stroke-width="1.5" opacity=".8"/>
+              <circle cx="90" cy="132" r="2" fill="#e8a020" opacity=".75"/>
+              <!-- Left arm -->
+              <rect x="30" y="118" width="20" height="68" rx="10" fill="#2a3a2a"/>
+              <ellipse cx="40" cy="190" rx="11" ry="9" fill="#d4a882"/>
+              <!-- Right arm (holding tablet/folder) -->
+              <rect x="130" y="118" width="20" height="68" rx="10" fill="#2a3a2a"/>
+              <ellipse cx="140" cy="190" rx="11" ry="9" fill="#d4a882"/>
+              <!-- Slim folder under right arm -->
+              <rect x="136" y="148" width="30" height="42" rx="4" fill="#e8a020" opacity=".25" stroke="#e8a020" stroke-width="1"/>
+              <!-- Belt / waistline -->
+              <rect x="58" y="188" width="64" height="7" rx="3" fill="#1a2a1a"/>
+              <!-- NECK -->
+              <rect x="82" y="98" width="16" height="22" rx="7" fill="#d4a882"/>
+              <!-- HEAD — softer oval for female -->
+              <ellipse cx="90" cy="64" rx="30" ry="34" fill="#d4a882"/>
+              <ellipse cx="60" cy="65" rx="6" ry="8" fill="#c49070"/>
+              <ellipse cx="120" cy="65" rx="6" ry="8" fill="#c49070"/>
+              <!-- Hair — dark brown, professional bun/updo -->
+              <ellipse cx="90" cy="38" rx="30" ry="16" fill="#2a1a0a"/>
+              <path d="M60,44 Q62,32 90,28 Q118,32 120,44 L118,52 Q90,38 62,52Z" fill="#2a1a0a"/>
+              <!-- Bun -->
+              <ellipse cx="90" cy="30" rx="16" ry="12" fill="#3a2010"/>
+              <ellipse cx="90" cy="28" rx="12" ry="9" fill="#2a1a0a"/>
+              <!-- Pin in bun -->
+              <line x1="84" y1="26" x2="96" y2="30" stroke="#e8a020" stroke-width="1.5" stroke-linecap="round" opacity=".7"/>
+              <!-- Face -->
+              <ellipse cx="76" cy="63" rx="8" ry="6" fill="white"/>
+              <ellipse cx="104" cy="63" rx="8" ry="6" fill="white"/>
+              <circle cx="77" cy="63" r="5" fill="#3a2010"/>
+              <circle cx="105" cy="63" r="5" fill="#3a2010"/>
+              <circle cx="76" cy="63" r="2.5" fill="#111"/>
+              <circle cx="104" cy="63" r="2.5" fill="#111"/>
+              <circle cx="78" cy="61" r="1.3" fill="white" opacity=".9"/>
+              <circle cx="106" cy="61" r="1.3" fill="white" opacity=".9"/>
+              <path d="M68,55 Q76,51 84,54" stroke="#2a1a0a" stroke-width="2" stroke-linecap="round" fill="none"/>
+              <path d="M96,54 Q104,51 112,55" stroke="#2a1a0a" stroke-width="2" stroke-linecap="round" fill="none"/>
+              <!-- Soft smile -->
+              <path d="M78,78 Q90,85 102,78" fill="none" stroke="#b06060" stroke-width="1.5" stroke-linecap="round"/>
+              <!-- Lipstick -->
+              <path d="M82,78 Q90,83 98,78" fill="#b06060" opacity=".35"/>
+              <!-- Light blush -->
+              <ellipse cx="70" cy="72" rx="7" ry="4" fill="#e88070" opacity=".2"/>
+              <ellipse cx="110" cy="72" rx="7" ry="4" fill="#e88070" opacity=".2"/>
+              <!-- Earrings (small gold drop) -->
+              <circle cx="60" cy="67" r="3" fill="#e8a020" opacity=".8"/>
+              <line x1="60" y1="70" x2="60" y2="76" stroke="#e8a020" stroke-width="1.5" opacity=".7"/>
+              <circle cx="60" cy="77" r="2" fill="#e8a020" opacity=".6"/>
+              <circle cx="120" cy="67" r="3" fill="#e8a020" opacity=".8"/>
+              <line x1="120" y1="70" x2="120" y2="76" stroke="#e8a020" stroke-width="1.5" opacity=".7"/>
+              <circle cx="120" cy="77" r="2" fill="#e8a020" opacity=".6"/>
+            </svg>
           </div>
         </div>
         <div class="team-info">
           <h3>Sophie Mertens</h3>
           <span class="team-role">Operations Director</span>
           <p class="team-bio">Responsible for day-to-day operational excellence, agent deployment, and client relations across all GLD Security contracts in Luxembourg.</p>
+          <div class="team-social">
+            <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a>
+          </div>
         </div>
       </div>
 
-      <!-- Member 3 -->
+      <!-- ── Member 3: Marco Weber / Head of Training ── Athletic build, navy suit, red tie -->
       <div class="team-card reveal delay-3">
         <div class="team-photo">
-          <div class="team-photo-placeholder">
-            <div class="team-avatar-ring">
-              <div class="team-avatar-icon">
-                <svg viewBox="0 0 42 42" fill="none">
-                  <circle cx="21" cy="15" r="9" stroke-width="1.4"/>
-                  <path d="M5 40v-2a16 16 0 0 1 32 0v2" stroke-width="1.4"/>
-                </svg>
-              </div>
-            </div>
-            <span class="photo-upload-hint">📷 Replace with photo</span>
+          <div class="team-avatar-svg">
+            <svg viewBox="0 0 180 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="90" cy="255" rx="56" ry="7" fill="#000" opacity=".3"/>
+              <!-- Legs (wider stance) -->
+              <rect x="54" y="188" width="30" height="68" rx="6" fill="#1a2236" transform="rotate(-3,69,222)"/>
+              <rect x="96" y="188" width="30" height="68" rx="6" fill="#1a2a40" transform="rotate(3,111,222)"/>
+              <!-- Shoes -->
+              <ellipse cx="69" cy="256" rx="19" ry="7" fill="#080e14"/>
+              <ellipse cx="111" cy="256" rx="19" ry="7" fill="#080e14"/>
+              <rect x="52" y="248" width="35" height="12" rx="5" fill="#0a1218"/>
+              <rect x="93" y="248" width="35" height="12" rx="5" fill="#0a1218"/>
+              <!-- BROADER JACKET (athletic) -->
+              <rect x="38" y="110" width="104" height="84" rx="12" fill="#1a2236"/>
+              <path d="M82,110 L68,142 L87,135Z" fill="#101828"/>
+              <path d="M98,110 L112,142 L93,135Z" fill="#101828"/>
+              <!-- White shirt -->
+              <rect x="82" y="112" width="16" height="34" rx="2" fill="#eef2f8" opacity=".95"/>
+              <!-- Red tie (training/active) -->
+              <path d="M87,114 L84,128 L90,148 L96,128 L93,114Z" fill="#c0392b" opacity=".85"/>
+              <path d="M87,114 L93,114 L91,120 L89,120Z" fill="#c0392b"/>
+              <!-- Training pin/badge on lapel -->
+              <circle cx="76" cy="120" r="5" fill="#0d1b2a" stroke="#e8a020" stroke-width="1.2"/>
+              <path d="M74,120 L75.5,122 L79,118" stroke="#e8a020" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+              <!-- Left arm (straight, stronger) -->
+              <rect x="22" y="114" width="22" height="74" rx="10" fill="#1a2236"/>
+              <ellipse cx="33" cy="192" rx="13" ry="10" fill="#b88060"/>
+              <!-- Right arm (slightly forward) -->
+              <rect x="136" y="114" width="22" height="74" rx="10" fill="#1a2236"/>
+              <ellipse cx="147" cy="192" rx="13" ry="10" fill="#b88060"/>
+              <!-- Belt -->
+              <rect x="54" y="188" width="72" height="9" rx="4" fill="#0a1018"/>
+              <rect x="82" y="189" width="16" height="7" rx="2" fill="#e8a020" opacity=".6"/>
+              <!-- NECK (thicker) -->
+              <rect x="82" y="94" width="16" height="22" rx="7" fill="#b88060"/>
+              <!-- Collar -->
+              <path d="M76,106 L87,118 L90,106Z" fill="#eef2f8" opacity=".9"/>
+              <path d="M104,106 L93,118 L90,106Z" fill="#eef2f8" opacity=".9"/>
+              <!-- HEAD (square jaw, athletic) -->
+              <rect x="62" y="36" width="56" height="60" rx="20" fill="#b88060"/>
+              <ellipse cx="90" cy="67" rx="28" ry="30" fill="#b88060"/>
+              <!-- Ears -->
+              <ellipse cx="62" cy="66" rx="7" ry="10" fill="#a87050"/>
+              <ellipse cx="118" cy="66" rx="7" ry="10" fill="#a87050"/>
+              <!-- Hair (short, dark) -->
+              <rect x="62" y="36" width="56" height="22" rx="16" fill="#1a0a06"/>
+              <path d="M62,48 Q90,34 118,48 L118,42 Q90,28 62,42Z" fill="#1a0a06"/>
+              <!-- Face -->
+              <ellipse cx="76" cy="64" rx="8" ry="6.5" fill="white"/>
+              <ellipse cx="104" cy="64" rx="8" ry="6.5" fill="white"/>
+              <circle cx="77" cy="64" r="5" fill="#3a2010"/>
+              <circle cx="105" cy="64" r="5" fill="#3a2010"/>
+              <circle cx="76" cy="64" r="2.5" fill="#111"/>
+              <circle cx="104" cy="64" r="2.5" fill="#111"/>
+              <circle cx="78" cy="62" r="1.3" fill="white" opacity=".9"/>
+              <circle cx="106" cy="62" r="1.3" fill="white" opacity=".9"/>
+              <!-- Bold brows -->
+              <path d="M67,56 Q76,51 85,55" stroke="#1a0a06" stroke-width="3" stroke-linecap="round" fill="none"/>
+              <path d="M95,55 Q104,51 113,56" stroke="#1a0a06" stroke-width="3" stroke-linecap="round" fill="none"/>
+              <!-- Confident smile -->
+              <path d="M77,79 Q90,86 103,79" fill="none" stroke="#7a4030" stroke-width="1.8" stroke-linecap="round"/>
+              <!-- Strong jaw shadow -->
+              <path d="M64,76 Q90,90 116,76" fill="#a07050" opacity=".2"/>
+              <!-- Stubble hint -->
+              <path d="M72,76 Q80,80 90,81 Q100,80 108,76" fill="#6a4030" opacity=".15"/>
+            </svg>
           </div>
         </div>
         <div class="team-info">
           <h3>Marco Weber</h3>
           <span class="team-role">Head of Training</span>
           <p class="team-bio">Oversees all agent training programmes, certifications, and continuing professional development to ensure GLD's standards remain best-in-class.</p>
+          <div class="team-social">
+            <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a>
+          </div>
         </div>
       </div>
 
-      <!-- Member 4 -->
+      <!-- ── Member 4: Laure Schmit / Client Relations ── Plum jacket, pearls -->
       <div class="team-card reveal delay-4">
         <div class="team-photo">
-          <div class="team-photo-placeholder">
-            <div class="team-avatar-ring">
-              <div class="team-avatar-icon">
-                <svg viewBox="0 0 42 42" fill="none">
-                  <circle cx="21" cy="15" r="9" stroke-width="1.4"/>
-                  <path d="M5 40v-2a16 16 0 0 1 32 0v2" stroke-width="1.4"/>
-                </svg>
-              </div>
-            </div>
-            <span class="photo-upload-hint">📷 Replace with photo</span>
+          <div class="team-avatar-svg">
+            <svg viewBox="0 0 180 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="90" cy="255" rx="52" ry="7" fill="#000" opacity=".3"/>
+              <!-- Legs -->
+              <rect x="62" y="192" width="56" height="64" rx="8" fill="#3a1a3a"/>
+              <!-- Shoes (heels suggestion) -->
+              <ellipse cx="74" cy="256" rx="15" ry="6" fill="#1a0a1a"/>
+              <ellipse cx="106" cy="256" rx="15" ry="6" fill="#1a0a1a"/>
+              <rect x="60" y="248" width="28" height="10" rx="4" fill="#1a0a1a"/>
+              <rect x="92" y="248" width="28" height="10" rx="4" fill="#1a0a1a"/>
+              <!-- Heel stiletto lines -->
+              <line x1="74" y1="258" x2="72" y2="264" stroke="#1a0a1a" stroke-width="2" stroke-linecap="round"/>
+              <line x1="106" y1="258" x2="104" y2="264" stroke="#1a0a1a" stroke-width="2" stroke-linecap="round"/>
+              <!-- PLUM JACKET -->
+              <rect x="48" y="114" width="84" height="82" rx="12" fill="#4a1a4a"/>
+              <path d="M82,114 L70,144 L88,138Z" fill="#381238"/>
+              <path d="M98,114 L110,144 L92,138Z" fill="#381238"/>
+              <!-- Cream blouse -->
+              <rect x="81" y="116" width="18" height="28" rx="2" fill="#f8f0e0" opacity=".95"/>
+              <!-- Pearl necklace -->
+              <path d="M78,124 Q90,130 102,124" fill="none" stroke="#f8f0e0" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="82" cy="124" r="2" fill="#f8f0e0" opacity=".9"/>
+              <circle cx="86" cy="127" r="2" fill="#f8f0e0" opacity=".9"/>
+              <circle cx="90" cy="129" r="2.2" fill="#f8f0e0" opacity=".95"/>
+              <circle cx="94" cy="127" r="2" fill="#f8f0e0" opacity=".9"/>
+              <circle cx="98" cy="124" r="2" fill="#f8f0e0" opacity=".9"/>
+              <!-- Brooch on lapel -->
+              <circle cx="74" cy="122" r="5" fill="#4a1a4a" stroke="#e8a020" stroke-width="1.5"/>
+              <circle cx="74" cy="122" r="2.5" fill="#e8a020" opacity=".7"/>
+              <!-- Left arm -->
+              <rect x="32" y="118" width="20" height="70" rx="10" fill="#4a1a4a"/>
+              <ellipse cx="42" cy="192" rx="11" ry="9" fill="#d4b090"/>
+              <!-- Right arm (phone/tablet) -->
+              <rect x="128" y="118" width="20" height="70" rx="10" fill="#4a1a4a"/>
+              <ellipse cx="138" cy="192" rx="11" ry="9" fill="#d4b090"/>
+              <!-- Thin phone in right hand -->
+              <rect x="132" y="160" width="16" height="30" rx="4" fill="#0d1b2a" stroke="#e8a020" stroke-width=".8"/>
+              <rect x="134" y="163" width="12" height="20" rx="2" fill="#162236" opacity=".8"/>
+              <circle cx="140" cy="187" r="2" fill="#1e3050"/>
+              <!-- NECK -->
+              <rect x="82" y="98" width="16" height="22" rx="7" fill="#d4b090"/>
+              <!-- HEAD -->
+              <ellipse cx="90" cy="64" rx="30" ry="33" fill="#d4b090"/>
+              <ellipse cx="60" cy="65" rx="6" ry="8" fill="#c49a78"/>
+              <ellipse cx="120" cy="65" rx="6" ry="8" fill="#c49a78"/>
+              <!-- Hair — lighter brown, shoulder-length waves suggestion -->
+              <path d="M60,42 Q68,28 90,24 Q112,28 120,42 L122,60 Q112,38 90,34 Q68,38 58,60Z" fill="#4a2a0a"/>
+              <!-- Side waves flowing -->
+              <path d="M58,52 Q54,68 56,86 Q58,96 62,100" fill="none" stroke="#4a2a0a" stroke-width="8" stroke-linecap="round"/>
+              <path d="M122,52 Q126,68 124,86 Q122,96 118,100" fill="none" stroke="#4a2a0a" stroke-width="8" stroke-linecap="round"/>
+              <!-- Face -->
+              <ellipse cx="76" cy="63" rx="8" ry="6" fill="white"/>
+              <ellipse cx="104" cy="63" rx="8" ry="6" fill="white"/>
+              <circle cx="77" cy="63" r="5" fill="#4a2810"/>
+              <circle cx="105" cy="63" r="5" fill="#4a2810"/>
+              <circle cx="76" cy="63" r="2.5" fill="#111"/>
+              <circle cx="104" cy="63" r="2.5" fill="#111"/>
+              <circle cx="78" cy="61" r="1.3" fill="white" opacity=".9"/>
+              <circle cx="106" cy="61" r="1.3" fill="white" opacity=".9"/>
+              <path d="M68,55 Q76,51 84,54" stroke="#4a2a0a" stroke-width="2" stroke-linecap="round" fill="none"/>
+              <path d="M96,54 Q104,51 112,55" stroke="#4a2a0a" stroke-width="2" stroke-linecap="round" fill="none"/>
+              <!-- Warm smile -->
+              <path d="M78,78 Q90,86 102,78" fill="none" stroke="#c05060" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M82,78 Q90,83 98,78" fill="#c05060" opacity=".3"/>
+              <!-- Blush -->
+              <ellipse cx="69" cy="72" rx="7" ry="4" fill="#e88070" opacity=".22"/>
+              <ellipse cx="111" cy="72" rx="7" ry="4" fill="#e88070" opacity=".22"/>
+              <!-- Gold stud earrings -->
+              <circle cx="60" cy="66" r="3" fill="#e8a020" opacity=".9"/>
+              <circle cx="120" cy="66" r="3" fill="#e8a020" opacity=".9"/>
+            </svg>
           </div>
         </div>
         <div class="team-info">
           <h3>Laure Schmit</h3>
           <span class="team-role">Client Relations Manager</span>
           <p class="team-bio">Manages key accounts and new business development, ensuring every client receives a personalised, responsive service from first contact onward.</p>
+          <div class="team-social">
+            <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a>
+          </div>
         </div>
       </div>
-
-
 
     </div><!-- /team-grid -->
   </div>
